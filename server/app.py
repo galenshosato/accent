@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request, make_response
 from extensions import *
+from models import User, Text
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
