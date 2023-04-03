@@ -6,6 +6,7 @@ if __name__ == '__main__':
     with app.app_context():
         print("Clearing db...")
         User.query.delete()
+        Text.query.delete()
 
         print("Seeding Users...")
         users = [
@@ -16,4 +17,11 @@ if __name__ == '__main__':
         ]
 
         db.session.add_all(users)
+
+        print("Seeding text")
+
+        text = Text(text_title='Richard III', text_content='''Now is the winter of our discontent made glorious
+                                                                    summer by this son of York.''', user_id= 1)
+        
+        db.session.add(text)
         db.session.commit()
