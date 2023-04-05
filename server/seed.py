@@ -20,8 +20,7 @@ if __name__ == '__main__':
 
         print("Seeding text")
 
-        text = Text(text_title='Richard III', text_content='''Now is the winter of our discontent made glorious
-                                                                    summer by this son of York.''', user_id= 1)
+        text = Text(text_title='Richard III', text_content='Now is the winter of our discontent made glorious summer by this son of York.', user_id= 1)
         
         db.session.add(text)
         db.session.commit()

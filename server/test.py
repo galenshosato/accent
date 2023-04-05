@@ -1,15 +1,29 @@
-import subprocess
+from test_text import text1, text2, text3, text4
+from Text import GenText
+import nltk
+import math
 
-text = "Now is the winter of our discontent made glorious summer by this son of york"
+nltk.download('punkt')
 
-def get_ipa(text):
-    result = subprocess.run(["espeak", "-q", "--ipa", "-v", "en", text], capture_output=True, text=True)
+text = text2
 
-    ipa = result.stdout.strip()
+sentences = nltk.sent_tokenize(text)
 
-    ipa = ipa.replace("(en)","").replace("(el)", "")
+length = math.ceil(len(sentences)/ 7)
+divided_sentences=[]
 
-    return ipa
+while len(sentences) > 0:
+    divided_sentences.append(sentences[0:length])
+    del sentences[0:length]
 
 
-print(get_ipa(text))
+    
+var1 = divided_sentences[0]
+
+
+for i in var1:
+    string_list = i.split('\n')
+    for x in string_list:
+        new = GenText(x)
+        print(x)
+        print(new.get_ipa())
