@@ -5,7 +5,7 @@ import math
 
 nltk.download('punkt')
 
-text = text2
+text = text1
 
 sentences = nltk.sent_tokenize(text)
 
@@ -18,12 +18,7 @@ while len(sentences) > 0:
 
 
     
-var1 = divided_sentences[0]
+var1, var2, var3, var4, var5, var6 = divided_sentences
 
 
-for i in var1:
-    string_list = i.split('\n')
-    for x in string_list:
-        new = GenText(x)
-        print(x)
-        print(new.get_ipa())
+print(var1)

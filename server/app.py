@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request, make_response
 from extensions import *
-from models import User, Text
+from models import User, Text, TextTranscription
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -15,6 +15,12 @@ migrate.init_app(app, db)
 @app.route('/')
 def home():
     return ''
+
+@app.route('/tr')
+def get_trs():
+    text_transcription = TextTranscription.query.all()
+    text_transcription_dict = [text.to_dict() for text in text_transcription]
+    return make_response(jsonify(text_transcription_dict), 200)
 
 @app.route('/username/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
 def get_text_by_id(id):

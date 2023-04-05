@@ -11,5 +11,6 @@ class GenText:
         ipa = result.stdout.strip()
 
         ipa = ipa.replace("(en)","").replace(f"({lang})", "")
+        ipa = ipa.replace(' ', ' | ')
 
         return ipa
