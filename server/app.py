@@ -16,18 +16,53 @@ migrate.init_app(app, db)
 def home():
     return ''
 
-@app.route('/tr')
-def get_trs():
-    text_transcription = TextTranscription.query.all()
-    text_transcription_dict = [text.to_dict() for text in text_transcription]
-    return make_response(jsonify(text_transcription_dict), 200)
 
-@app.route('/username/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
-def get_text_by_id(id):
-    text = Text.query.filter_by(id=id).first()
+@app.route('/api/users', methods=['GET', 'POST'])
+def get_users():
+    if request.method == 'GET':
+        users = User.query.all()
+        user_dict = [user.to_dict() for user in users]
+        return make_response(jsonify(user_dict), 200)
+    elif request.method == 'POST':
+        new_user = User()
+        data = request.get_json()
+
+        for field in data:
+            setattr(new_user, field, data[field])
+        
+        db.session.add(new_user)
+        db.session.commit()
+
+        return make_response(jsonify(new_user.to_dict()), 201)
+
+@app.route('/api/<string:username>/texts', methods=['GET', 'POST'])
+def get_user_texts(username):
+    user = User.query.filter_by(username=username).first()
+    if request.method == 'GET':
+       texts = [text.to_dict() for text in user.texts]
+       return make_response(jsonify(texts), 200)
+    
+    elif request.method == 'POST':
+        new_text = Text()
+        data = request.get_json()
+
+        for field in data:
+            setattr(new_text, field, data[field])
+        
+        db.session.add(new_text)
+        db.session.commit()
+
+        return make_response(jsonify(new_text.to_dict()), 201)
+    
+
+@app.route('/api/<string:username>/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
+def get_text_by_username_id(username, id):
+    user = User.query.filter_by(username = username).first()
+    text = Text.query.filter(Text.id==id, Text.user_id==user.id).first()
     if request.method == 'GET':
         text_dict = text.to_dict()
         return make_response(jsonify(text_dict), 200)
+    
     elif request.method == 'PATCH':
         data = request.get_json()
         for field in data:
@@ -37,6 +72,49 @@ def get_text_by_id(id):
         db.session.commit()
 
         return make_response(jsonify(text.to_dict()), 200)
+    
+    elif request.method == 'DELETE':
+        db.session.delete(text)
+        db.session.commit()
+
+        return make_response(jsonify({"Text Deleted": "You have successfully deleted this piece of text!"}), 200)
+
+@app.route('/api/<string:username>/<int:id>/tr', methods = ['GET','POST'])
+def get_trs_for_text(username, id):
+    user = User.query.filter_by(username = username).first()
+    text = Text.query.filter(Text.id==id, Text.user_id==user.id).first()
+
+    if request.method == 'GET':
+        trs = [tr.to_dict() for tr in text.text_transcriptions]
+        return make_response(jsonify(trs), 200)
+    
+    elif request.method == 'POST':
+        new_tr = TextTranscription()
+        data = request.get_json()
+
+        for field in data:
+            setattr(new_tr, field, data[field])
+        
+        db.session.add(new_tr)
+        db.session.commit()
+
+        return make_response(jsonify(new_tr.to_dict()), 201)
+
+
+@app.route('/api/<string:username>/<int:id>/tr/<string:language>', methods = ['GET', 'DELETE'])
+def get_tr_for_piece_by_lang(username, id, language):
+    user = User.query.filter_by(username = username).first()
+    text = Text.query.filter(Text.id==id, Text.user_id==user.id).first()
+    text_transcription = TextTranscription.query.filter(TextTranscription.text_id == text.id, TextTranscription.language == language).first()
+    
+    if request.method == 'GET':
+        text_transcription_dict = text_transcription.to_dict()
+        return make_response(jsonify(text_transcription_dict), 200)
+    
+    elif request.method == 'DELETE':
+        db.session.delete(text_transcription)
+        db.session.commit()
+        return make_response(jsonify({"Transcription Deleted": "You have successfully deleted this transcription"}), 200)
 
 
 if __name__ == '__main__':

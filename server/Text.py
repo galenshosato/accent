@@ -1,5 +1,4 @@
 import subprocess
- 
 
 class GenText:
     def __init__(self, text):
@@ -11,6 +10,8 @@ class GenText:
         ipa = result.stdout.strip()
 
         ipa = ipa.replace("(en)","").replace(f"({lang})", "")
-        ipa = ipa.replace(' ', ' | ')
+        ipa = ipa.replace('\n', ", ")
 
         return ipa
+
+

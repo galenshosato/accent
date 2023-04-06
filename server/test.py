@@ -1,11 +1,10 @@
-from test_text import text1, text2, text3, text4
-from Text import GenText
+
 import nltk
 import math
 
 nltk.download('punkt')
 
-text = text1
+text = text
 
 sentences = nltk.sent_tokenize(text)
 

@@ -17,7 +17,8 @@ class User(db.Model):
             "id": self.id,
             "name": self.name,
             "email": self.email,
-            "username": self.username
+            "username": self.username,
+            "texts": [text.to_dict() for text in self.texts] 
         }
 
 class Text(db.Model):
@@ -35,7 +36,7 @@ class Text(db.Model):
             "id:": self.id,
             "text_title": self.text_title,
             "text_content": self.text_content,
-            "transcription": self.transcription,
+            "en-us_IPA": self.transcription,
             "user_id": self.user_id,
             "user": self.user.username,
             "transcriptions": [text_tr.to_dict() for text_tr in self.text_transcriptions]
