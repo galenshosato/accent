@@ -2,6 +2,7 @@ from Text import GenText
 import nltk
 import math
 from test_text import text1, text3, text4, text5
+from models import TextTranscription
 
 
 def text_to_IPA(text):
@@ -9,51 +10,67 @@ def text_to_IPA(text):
 
     return new_tr.get_ipa()
 
-
-def arr4(var1, var2, var3, var4):
+def arr_func(var1, lang):
     var1_text=[]
     var1_tr=[]
-    var2_text=[]
-    var2_tr=[]
-    var3_text=[]
-    var3_tr=[]
-    var4_text=[]
-    var4_tr=[]
-
     for i in var1:
         string_list = i.split('\n')
         for x in string_list:
             if x:
                 new = GenText(x)
                 var1_text.append(x)
-                var1_tr.append(new.get_ipa())
-            
+                var1_tr.append(new.get_ipa(lang))
+    return [var1_text, var1_tr]
+
+def arr2(var1, var2, lang):
+    var2_text=[]
+    var2_tr=[]
     for i in var2:
         string_list = i.split('\n')
         for x in string_list:
             if x:
                 new = GenText(x)
                 var2_text.append(x)
-                var2_tr.append(new.get_ipa())
-            
+                var2_tr.append(new.get_ipa(lang))
+    array = arr_func(var1, lang)
+    array.append(var2_text)
+    array.append(var2_tr)
+    return array
+
+def arr3(var1, var2, var3, lang):
+    var3_text=[]
+    var3_tr=[]
     for i in var3:
         string_list = i.split('\n')
         for x in string_list:
             if x:
                 new = GenText(x)
                 var3_text.append(x)
-                var3_tr.append(new.get_ipa())
-            
+                var3_tr.append(new.get_ipa(lang))
+    array = arr2(var1, var2, lang)
+    array.append(var3_text)
+    array.append(var3_tr)
+    return array
+
+
+def arr4(var1, var2, var3, var4, lang):
+    var4_text=[]
+    var4_tr=[]
+
     for i in var4:
         string_list = i.split('\n')
         for x in string_list:
             if x:
                 new = GenText(x)
                 var4_text.append(x)
-                var4_tr.append(new.get_ipa())
-    return [var1_text, var1_tr, var2_text, var2_tr, var3_text, var3_tr, var4_text, var4_tr]
+                var4_tr.append(new.get_ipa(lang))
+    array = arr3(var1, var2, var3, lang)
+    array.append(var4_text)
+    array.append(var4_tr)
+    return array
+    
 
-def arr5(var1, var2, var3, var4, var5):
+def arr5(var1, var2, var3, var4, var5, lang):
     var5_text=[]
     var5_tr=[]
     for i in var5:
@@ -62,13 +79,13 @@ def arr5(var1, var2, var3, var4, var5):
             if x:
                 new = GenText(x)
                 var5_text.append(x)
-                var5_tr.append(new.get_ipa())
-    array = arr4(var1, var2, var3, var4)
+                var5_tr.append(new.get_ipa(lang))
+    array = arr4(var1, var2, var3, var4, lang)
     array.append(var5_text)
     array.append(var5_tr)
     return array
 
-def arr6(var1, var2, var3, var4, var5, var6):
+def arr6(var1, var2, var3, var4, var5, var6, lang):
     var6_text=[]
     var6_tr=[]
     for i in var6:
@@ -77,13 +94,13 @@ def arr6(var1, var2, var3, var4, var5, var6):
             if x:
                 new = GenText(x)
                 var6_text.append(x)
-                var6_tr.append(new.get_ipa())
-    array = arr5(var1, var2, var3, var4, var5)
+                var6_tr.append(new.get_ipa(lang))
+    array = arr5(var1, var2, var3, var4, var5, lang)
     array.append(var6_text)
     array.append(var6_tr)
     return array
 
-def arr7(var1, var2, var3, var4, var5, var6, var7):
+def arr7(var1, var2, var3, var4, var5, var6, var7, lang):
     var7_text=[]
     var7_tr=[]
     for i in var7:
@@ -92,13 +109,13 @@ def arr7(var1, var2, var3, var4, var5, var6, var7):
             if x:
                 new = GenText(x)
                 var7_text.append(x)
-                var7_tr.append(new.get_ipa())
-    array = arr6(var1, var2, var3, var4, var5, var6)
+                var7_tr.append(new.get_ipa(lang))
+    array = arr6(var1, var2, var3, var4, var5, var6, lang)
     array.append(var7_text)
     array.append(var7_tr)
     return array
 
-def split_text(text):
+def split_text(text, lang):
     if text is None:
         return 
     
@@ -110,29 +127,74 @@ def split_text(text):
         divided_sentences.append(sentences[0:length])
         del sentences[0:length]
     
-    print(len(divided_sentences))
-    print(divided_sentences)
+    if len(divided_sentences) == 1:
+        var1 = divided_sentences
+        return arr_func(var1, lang)
+    
+    elif len(divided_sentences) == 2:
+        var1, var2 = divided_sentences
+        return arr2(var1, var2, lang)
+    
+    elif len(divided_sentences) == 3:
+        var1, var2, var3 = divided_sentences
+        return arr3(var1, var2, var3, lang)
 
-    if len(divided_sentences) == 4:
-        print('This hit 4')
+    elif len(divided_sentences) == 4:
         var1, var2, var3, var4 = divided_sentences
-        return arr4(var1, var2, var3, var4)
+        return arr4(var1, var2, var3, var4, lang)
     
     elif len(divided_sentences) == 5:
-        print("This hit 5")
         var1, var2, var3, var4, var5 = divided_sentences
-        return arr5(var1, var2, var3, var4, var5)
+        return arr5(var1, var2, var3, var4, var5, lang)
     
     elif len(divided_sentences) == 6:
-        print("This hit 6")
         var1, var2, var3, var4, var5, var6 = divided_sentences
-        return arr6(var1, var2, var3, var4, var5, var6)
+        return arr6(var1, var2, var3, var4, var5, var6, lang)
     
     elif len(divided_sentences) == 7:
-        print("This hit 7")
         var1, var2, var3, var4, var5, var6, var7 = divided_sentences
-        return arr7(var1, var2, var3, var4, var5, var6, var7)
+        return arr7(var1, var2, var3, var4, var5, var6, var7, lang)
     
+    else:
+        return
+
+def create_new_tr(array, lang, id):
+
+    if len(array) == 2:
+        text, tr = array
+        new_tt = TextTranscription(language = lang, text1=text, tr1=tr, text_id = id)
+        return new_tt
+    elif len(array) == 4:
+        text1, tr1, text2, tr2 = array
+        new_tt = TextTranscription(language = lang, text1=text1, tr1=tr1, text2=text2, tr2=tr2, text_id = id)
+        return new_tt
+    elif len(array) == 6:
+        text1, tr1, text2, tr2, text3, tr3 = array
+        new_tt = TextTranscription(language=lang, text1=text1, tr1=tr1, text2=text2, tr2=tr2, text3=text3, tr3=tr3, text_id = id)
+        return new_tt
+    elif len(array) == 8:
+        text1, tr1, text2, tr2, text3, tr3, text4, tr4 = array
+        new_tt = TextTranscription(language=lang, text1=text1, tr1=tr1, text2=text2, tr2=tr2, text3=text3, tr3=tr3,
+                                   text4=text4, tr4=tr4, text_id = id)
+        return new_tt
+
+    elif len(array) == 10:
+        text1, tr1, text2, tr2, text3, tr3, text4, tr4, text5, tr5 = array
+        new_tt = TextTranscription(language=lang, text1=text1, tr1=tr1, text2=text2, tr2=tr2, text3=text3, tr3=tr3,
+                                   text4=text4, tr4=tr4, text5=text5, tr5=tr5, text_id = id)
+        return new_tt
+    
+    elif len(array) == 12:
+        text1, tr1, text2, tr2, text3, tr3, text4, tr4, text5, tr5, text6, tr6 = array
+        new_tt = TextTranscription(language=lang, text1=text1, tr1=tr1, text2=text2, tr2=tr2, text3=text3, tr3=tr3,
+                                   text4=text4, tr4=tr4, text5=text5, tr5=tr5, text6=text6, tr6=tr6, text_id = id)
+        return new_tt
+    
+    elif len(array) == 14:
+        text1, tr1, text2, tr2, text3, tr3, text4, tr4, text5, tr5, text6, tr6, text7, tr7 = array
+        new_tt = TextTranscription(language=lang, text1=text1, tr1=tr1, text2=text2, tr2=tr2, text3=text3, tr3=tr3,
+                                   text4=text4, tr4=tr4, text5=text5, tr5=tr5, text6=text6, tr6=tr6, text7=text7, tr7=tr7, text_id = id)
+        return new_tt
     else:
         return
 

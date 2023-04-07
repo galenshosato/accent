@@ -2,7 +2,7 @@ from app import app
 from models import Text, User, TextTranscription
 from extensions import db  
 from test_text import text1
-from BE_functions import text_to_IPA, split_text
+from BE_functions import text_to_IPA, split_text, create_new_tr
 
 if __name__ == '__main__':
     with app.app_context():
@@ -28,14 +28,8 @@ if __name__ == '__main__':
 
         print("Seeding transcriptions")
 
-        print(len(split_text(text1)))
+        split = split_text(text1, "en-us")
+        new_tt = create_new_tr(split, "en-us", 1)
 
-
-        
-
-        # text_tr = TextTranscription(language = "en-us", text1=text1, tr1=tr1, text2=text2, tr2=tr2,
-        #                             text3=text3, tr3=tr3, text4=text4, tr4=tr4, text5=text5,
-        #                             tr5=tr5, text6=text6, tr6=tr6, text_id= 1)
-        
-        # db.session.add(text_tr)
-        # db.session.commit()
+        db.session.add(new_tt)
+        db.session.commit()
