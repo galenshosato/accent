@@ -115,7 +115,7 @@ def arr7(var1, var2, var3, var4, var5, var6, var7, lang):
     array.append(var7_tr)
     return array
 
-def split_text(text, lang):
+def split_text(text, lang='en-us'):
     if text is None:
         return 
     
@@ -199,9 +199,5 @@ def create_new_tr(array, lang, id):
         return
 
     
-if __name__ == '__main__':
-    print(split_text(text1))
-    print(len(split_text(text1)))
-
 
 

@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request, make_response
 from extensions import *
 from models import User, Text, TextTranscription
+from BE_functions import text_to_IPA, split_text, create_new_tr
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -49,6 +50,9 @@ def get_user_texts(username):
         for field in data:
             setattr(new_text, field, data[field])
         
+        new_text_tr = text_to_IPA(new_text.text_content)
+        setattr(new_text, "transcription", new_text_tr)
+        
         db.session.add(new_text)
         db.session.commit()
 
@@ -89,16 +93,17 @@ def get_trs_for_text(username, id):
         return make_response(jsonify(trs), 200)
     
     elif request.method == 'POST':
-        new_tr = TextTranscription()
         data = request.get_json()
+        lang = data['language']
+        text_content = data['text']
 
-        for field in data:
-            setattr(new_tr, field, data[field])
+        split = split_text(text_content, lang)
+        new_tt = create_new_tr(split, lang, id)
         
-        db.session.add(new_tr)
+        db.session.add(new_tt)
         db.session.commit()
 
-        return make_response(jsonify(new_tr.to_dict()), 201)
+        return make_response(jsonify(new_tt.to_dict()), 201)
 
 
 @app.route('/api/<string:username>/<int:id>/tr/<string:language>', methods = ['GET', 'DELETE'])
