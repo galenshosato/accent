@@ -1,5 +1,4 @@
 text1 = """
-
 Now is the winter of our discontent
 Made glorious summer by this sun of York;
 And all the clouds that lour'd upon our house
@@ -42,8 +41,6 @@ About a prophecy, which says that 'G'
 Of Edward's heirs the murderer shall be.
 Dive, thoughts, down to my soul: here
 Clarence comes.
-
-
 """
 
 text2 = """
@@ -84,17 +81,18 @@ thought it was a fair price for a cure.
 """
 
 text3 = """
+Can we forge against these enemies a grand and global alliance, North and South, East and West, 
+that can assure a more fruitful life for all mankind? Will you join in that historic effort?
 
-Four score and seven years ago our fathers brought forth on this continent a new nation, conceived in liberty, and dedicated to the proposition that all men are created equal. 
-Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. 
-We are met on a great battlefield of that war. 
-We have come to dedicate a portion of that field as a final resting place for those who here gave their lives that that nation might live.
-It is altogether fitting and proper that we should do this. 
-But in a larger sense we cannot dedicate, we cannot consecrate, we cannot hallow this ground. 
-The brave men, living and dead, who struggled here have consecrated it, far above our poor power to add or detract.
-The world will little note, nor long remember, what we say here, but it can never forget what they did here.
-It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced.
-It is rather for us to be here dedicated to the great task remaining before us, that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion, that we here highly resolve that these dead shall not have died in vain, that this nation, under God, shall have a new birth of freedom, and that government of the people, by the people, for the people, shall not perish from the earth.
+In the long history of the world, only a few generations have been granted the role of defending 
+freedom in its hour of maximum danger. I do not shrink from this responsibility -- I welcome it. 
+I do not believe that any of us would exchange places with any other people or any other generation. 
+The energy, the faith, the devotion which we bring to this endeavor will light our country and 
+all who serve it -- and the glow from that fire can truly light the world.
+
+And so, my fellow Americans: ask not what your country can do for you -- ask what you can do for your country.
+
+My fellow citizens of the world: ask not what America will do for you, but what together we can do for the freedom of man.
 """
 
 text4 = """
@@ -132,22 +130,4 @@ And enterprises of great pith and moment
 With this regard their currents turn awry,
 And lose the name of action.-Soft you now!
 
-"""
-
-text5 = """
-Sentence 1.
-Sentence 2.
-Sentence 3.
-Sentence 4.
-Sentence 5.
-Sentence 6.
-Sentence 7.
-Sentence 8.
-Sentence 9.
-Sentence 10.
-Sentence 11.
-Sentence 12.
-Sentence 13.
-Sentence 14.
-Sentence 15.
 """

@@ -41,6 +41,21 @@ class Text(db.Model):
             "user": self.user.username,
             "transcriptions": [text_tr.to_dict() for text_tr in self.text_transcriptions]
         }
+
+class ExampleText(db.Model):
+    __tablename__ = 'example_texts'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)
+    text = db.Column(db.String)
+
+    def to_dict(self):
+        return {
+            "id:": self.id,
+            "title": self.title,
+            "text": self.text
+        }
+
     
 class TextTranscription(db.Model):
     __tablename__ = 'text_transcriptions'

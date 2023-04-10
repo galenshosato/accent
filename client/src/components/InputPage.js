@@ -1,7 +1,6 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
 import React from 'react';
-import TextCard from './TextCard';
 
 function FileInput() {
     return (
@@ -15,7 +14,6 @@ function FileInput() {
                 Submit
             </Button>
         </Form>
-        <TextCard />
         </>
     )
 }

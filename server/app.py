@@ -1,6 +1,6 @@
-from flask import Flask, jsonify, request, make_response
+from flask import Flask, jsonify, request, make_response, session as browser_session
 from extensions import *
-from models import User, Text, TextTranscription
+from models import User, Text, TextTranscription, ExampleText
 from BE_functions import text_to_IPA, split_text, create_new_tr
 
 app = Flask(__name__)
@@ -16,6 +16,32 @@ migrate.init_app(app, db)
 @app.route('/')
 def home():
     return ''
+
+@app.route('/api/login', methods=['POST'])
+def login():
+    if request.method == 'POST':
+        data = request.get_json()
+        email = data.get('email')
+        password = data.get('password')
+        user = User.query.filter_by(email=email).first()
+
+        if not user:
+            return make_response(jsonify({"error": "invalid login"}))
+
+        browser_session['user_id'] = user.id
+
+        return make_response(jsonify(user.to_dict()), 201)
+
+@app.route('/api/check_session')
+def get_user():
+    user = User.query.filter(User.id == browser_session.get('user_id')).first()
+
+    if user:
+        return jsonify(user.to_dict())
+    else:
+        return jsonify({'message': '401: Not Authorized'}), 401
+
+
 
 
 @app.route('/api/users', methods=['GET', 'POST'])
@@ -35,6 +61,12 @@ def get_users():
         db.session.commit()
 
         return make_response(jsonify(new_user.to_dict()), 201)
+
+@app.route('/api/example_texts')
+def get_example_texts():
+    texts = ExampleText.query.all()
+    texts_to_dict = [text.to_dict() for text in texts]
+    return make_response(jsonify(texts_to_dict), 200)
 
 @app.route('/api/<string:username>/texts', methods=['GET', 'POST'])
 def get_user_texts(username):

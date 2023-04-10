@@ -1,7 +1,7 @@
 from Text import GenText
 import nltk
 import math
-from test_text import text1, text3, text4, text5
+from test_text import text1, text3, text4
 from models import TextTranscription
 
 

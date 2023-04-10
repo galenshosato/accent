@@ -1,7 +1,7 @@
 from app import app
-from models import Text, User, TextTranscription
+from models import Text, User, TextTranscription, ExampleText
 from extensions import db  
-from test_text import text1
+from test_text import text1, text2, text3, text4
 from BE_functions import text_to_IPA, split_text, create_new_tr
 
 if __name__ == '__main__':
@@ -10,6 +10,7 @@ if __name__ == '__main__':
         User.query.delete()
         Text.query.delete()
         TextTranscription.query.delete()
+        ExampleText.query.delete()
 
         print("Seeding Users...")
         users = [
@@ -25,6 +26,15 @@ if __name__ == '__main__':
 
         text = Text(text_title='Richard III', text_content=text1, transcription=text_to_IPA(text1), user_id= 1)
         db.session.add(text)
+
+        example_texts= [
+            ExampleText(title='Richard III', text=text1),
+            ExampleText(title='Comma Gets A Cure', text=text2),
+            ExampleText(title="JFK Inauguration Address", text=text3),
+            ExampleText(title="Hamlet", text=text4)
+        ]
+
+        db.session.add_all(example_texts)
 
         print("Seeding transcriptions")
 
