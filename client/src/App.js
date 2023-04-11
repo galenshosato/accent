@@ -7,7 +7,7 @@ import ConstTextCard from './components/ConstTextCard';
 
 function App() {
   const [user, setUser] = useState()
-  const [constText, setConstText] = useState()
+  const [constText, setConstText] = useState([])
 
 
   useEffect(() => {
@@ -30,7 +30,7 @@ function App() {
     <div>
       <NavBar user={user} setUser={setUser}  />
       {constText.map((text) => {
-        return <ConstTextCard key={text.id} title={text.title} content={text.text} />
+        return <ConstTextCard key={text.id} title={text.title} content={text.text} user={user} />
       })}
       {/* <FileInput /> */}
     </div>

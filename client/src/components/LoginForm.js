@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Modal, Button, Form} from 'react-bootstrap'
+import {Modal, Form} from 'react-bootstrap'
 
 function LoginForm({setUser}) {
     const [showLogin, setShowLogin] = useState(false)
@@ -39,7 +39,7 @@ function LoginForm({setUser}) {
                 <Form id='login-form'>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email Address</Form.Label>
-                        <Form.Control type='email' placeholder="Enter Email" />
+                        <Form.Control type='email' placeholder="Enter Email" autoFocus/>
                     </Form.Group>
                     <br></br>
                     <Form.Group controlId="formBasicPassword">

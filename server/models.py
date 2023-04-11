@@ -33,7 +33,7 @@ class Text(db.Model):
 
     def to_dict(self):
         return {
-            "id:": self.id,
+            "id": self.id,
             "text_title": self.text_title,
             "text_content": self.text_content,
             "en-us_IPA": self.transcription,
@@ -51,7 +51,7 @@ class ExampleText(db.Model):
 
     def to_dict(self):
         return {
-            "id:": self.id,
+            "id": self.id,
             "title": self.title,
             "text": self.text
         }
