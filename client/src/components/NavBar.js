@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav'
 import React from 'react'
 import LoginForm from './LoginForm'
 
-function NavBar({user, setUser}) {
+function NavBar({user, setUser, setUserTexts}) {
     return (
         <>
         <Navbar bg="light" variant="light">
@@ -15,7 +15,7 @@ function NavBar({user, setUser}) {
                 <Nav.Link href="#features">Features</Nav.Link>
                 <Nav.Link href="#pricing">Pricing</Nav.Link>
              </Nav>
-            {user ? <Navbar.Text>Welcome, {user.name}!</Navbar.Text> : <LoginForm setUser={setUser} />}
+            {user.name ? <Navbar.Text>Welcome, {user.name}!</Navbar.Text> : <LoginForm setUser={setUser}/>}
          </Container>
       </Navbar>
         </>
