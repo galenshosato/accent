@@ -2,7 +2,6 @@ import React from "react"
 import UserTextCard from "./UserTextCard"
 
 function UserTextList({userTexts}) {
-    console.log(userTexts)
     return (
         <>
         {userTexts.map(text => {

@@ -21,14 +21,17 @@ function App() {
     });
   }, []);
 
-  console.log(user)
-
-
 
   useEffect(()=> {
     fetch('/api/example_texts')
     .then(resp => resp.json())
     .then(data => setConstText(data))
+  }, [])
+
+  useEffect(() => {
+    fetch(`/api/gmoney/texts`)
+    .then(resp => resp.json())
+    .then(data => setUserTexts(data))
   }, [])
 
 
