@@ -1,8 +1,10 @@
 import {useState} from "react";
 import {Modal, Form} from 'react-bootstrap'
+import SignInModal from "./SignInModal";
 
 function LoginForm({setUser}) {
     const [showLogin, setShowLogin] = useState(false)
+    const [showSignIn, setShowSignIn] = useState(false)
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -27,10 +29,15 @@ function LoginForm({setUser}) {
         
     }
 
+    function handleClick (e) {
+        setShowLogin(prev => !prev)
+        setShowSignIn(prev => !prev)
+    }
+
 
     return (
         <>
-        <button onClick={() => setShowLogin(true)}>Login</button>
+        <button onClick={() => setShowLogin(true)}>Login/Sign Up</button>
         <Modal centered show={showLogin} onHide={() => setShowLogin(false)}>
             <Modal.Header closeButton>
                 <Modal.Title>Login</Modal.Title>
@@ -47,11 +54,18 @@ function LoginForm({setUser}) {
                         <Form.Control type='password' placeholder="Enter Password" />
                     </Form.Group>
                 </Form>
+                <br></br>
+                <div>
+                    <span>
+                        Don't have an account? <span onClick={handleClick}>Sign Up!</span>
+                    </span>
+                </div>
             </Modal.Body>
             <Modal.Footer>
                 <button onClick={handleSubmit}>Submit</button>
             </Modal.Footer>
         </Modal>
+        <SignInModal showSignin={showSignIn} setShowSignIn={setShowSignIn} />
         </>
     )
 }
