@@ -85,7 +85,6 @@ function LangChoiceModal({title, content, showLangChoice, setShowLangChoice, use
                 break;
             default:
                 setDialectLang('en-us')
-                console.log(lang)
         }
     }
 

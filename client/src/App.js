@@ -1,7 +1,7 @@
 import NavBar from './components/NavBar';
 import './App.css';
 import React from 'react';
-import FileInput from './components/InputPage';
+import InputPage from './components/InputPage'
 import { useState, useEffect } from 'react';
 import ConstTextCard from './components/ConstTextCard';
 import UserTextList from './components/UserTextList';
@@ -42,8 +42,8 @@ function App() {
       {constText.map((text) => {
         return <ConstTextCard key={text.id} title={text.title} content={text.text} user={user} />
       })}
-      <UserTextList user={user} userTexts={userTexts} />
-      {/* <FileInput /> */}
+      {/* <UserTextList user={user} userTexts={userTexts} /> */}
+      <InputPage />
     </div>
   );
 }

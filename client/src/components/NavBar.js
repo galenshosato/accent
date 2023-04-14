@@ -4,7 +4,16 @@ import Nav from 'react-bootstrap/Nav'
 import React from 'react'
 import LoginForm from './LoginForm'
 
-function NavBar({user, setUser, setUserTexts}) {
+function NavBar({user, setUser}) {
+   
+    function handleLogout () {
+        fetch('/api/logout', {
+            method: 'POST'
+        })
+
+        setUser('')
+    }
+
     return (
         <>
         <Navbar bg="light" variant="light">
@@ -16,6 +25,7 @@ function NavBar({user, setUser, setUserTexts}) {
                 <Nav.Link href="#pricing">Pricing</Nav.Link>
              </Nav>
             {user.name ? <Navbar.Text>Welcome, {user.name}!</Navbar.Text> : <LoginForm setUser={setUser}/>}
+            {user.name ? <button onClick={handleLogout}>Logout</button> : null}
          </Container>
       </Navbar>
         </>

@@ -38,16 +38,15 @@ function SignInModal({showSignIn, setShowSignIn, setUser}) {
         <>
          <Modal show={showSignIn} onHide={() => setShowSignIn(false)} >
             <Modal.Body>
-                <br></br>
                 <Modal.Title>Create your account</Modal.Title>
                 <br></br>
                 <Form id='sign-in-form'>
                     <Form.Group id="signInName">
-                        <Form.Control size='lg' type="name" placeholder="Name" ref={nameRef} autoFocus />
+                        <Form.Control size='lg' type="text" placeholder="Name" ref={nameRef} autoFocus />
                     </Form.Group>
                     <br></br>
                     <Form.Group id="signInUserName">
-                        <Form.Control size='lg' type="username" placeholder="Username" ref={usernameRef} />
+                        <Form.Control size='lg' type="text" placeholder="Username" ref={usernameRef} />
                     </Form.Group>
                     <br></br>
                     <Form.Group id="signInEmail">
