@@ -1,33 +1,67 @@
-import React from "react";
+import React, {useRef} from "react";
 import {Modal, Form} from 'react-bootstrap'
 
-function SignInModal({showSignIn, setShowSignIn}) {
+function SignInModal({showSignIn, setShowSignIn, setUser}) {
+    const nameRef = useRef(null)
+    const usernameRef = useRef(null)
+    const emailRef = useRef(null)
+    const passwordRef = useRef(null)
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        const name = nameRef.current.value
+        const username = usernameRef.current.value
+        const email = emailRef.current.value
+        const password = passwordRef.current.value
+
+        const newUser = {
+            name: name,
+            username: username,
+            email: email,
+            password: password
+        }
+
+        fetch('/api/users', {
+            method:'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(newUser)
+        })
+        .then(resp => resp.json())
+        .then(data => setUser(data))
+
+        setShowSignIn(false)
+    }
+
     return(
         <>
-         <Modal >
-            <Modal.Header>
-                <Modal.Title>Welcome to Accent!</Modal.Title>
-            </Modal.Header>
+         <Modal show={showSignIn} onHide={() => setShowSignIn(false)} >
             <Modal.Body>
+                <br></br>
+                <Modal.Title>Create your account</Modal.Title>
+                <br></br>
                 <Form id='sign-in-form'>
-                    <Form.Group controlId="signInName">
-                        <Form.Label>What is your name?</Form.Label>
-                        <Form.Control type="name" placeholder="Name" autoFocus />
+                    <Form.Group id="signInName">
+                        <Form.Control size='lg' type="name" placeholder="Name" ref={nameRef} autoFocus />
                     </Form.Group>
-                    <Form.Group controlId="signInUserName">
-                        <Form.Label>Create a username</Form.Label>
-                        <Form.Control type="username" placeholder="Username" />
+                    <br></br>
+                    <Form.Group id="signInUserName">
+                        <Form.Control size='lg' type="username" placeholder="Username" ref={usernameRef} />
                     </Form.Group>
-                    <Form.Group controlId="signInEmail">
-                        <Form.Label>Enter a valid email</Form.Label>
-                        <Form.Control type="email" placeholder="Email" />
+                    <br></br>
+                    <Form.Group id="signInEmail">
+                        <Form.Control size='lg' type="email" placeholder="Email" ref={emailRef} />
                     </Form.Group>
-                    <Form.Group controlId="signInPassword">
-                        <Form.Label>Create a password</Form.Label>
-                        <Form.Control placeholder="Password"/>
+                    <br></br>
+                    <Form.Group id="signInPassword">
+                        <Form.Control size='lg' placeholder="Password" ref={passwordRef}/>
                     </Form.Group>
                 </Form>
             </Modal.Body>
+            <Modal.Footer>
+                <button onClick={handleSubmit}>Submit</button>
+            </Modal.Footer>
          </Modal>
         </>
     )

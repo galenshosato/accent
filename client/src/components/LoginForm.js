@@ -30,8 +30,8 @@ function LoginForm({setUser}) {
     }
 
     function handleClick (e) {
-        setShowLogin(prev => !prev)
-        setShowSignIn(prev => !prev)
+        setShowLogin(false)
+        setShowSignIn(true)
     }
 
 
@@ -39,7 +39,7 @@ function LoginForm({setUser}) {
         <>
         <button onClick={() => setShowLogin(true)}>Login/Sign Up</button>
         <Modal centered show={showLogin} onHide={() => setShowLogin(false)}>
-            <Modal.Header closeButton>
+            <Modal.Header>
                 <Modal.Title>Login</Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -65,7 +65,7 @@ function LoginForm({setUser}) {
                 <button onClick={handleSubmit}>Submit</button>
             </Modal.Footer>
         </Modal>
-        <SignInModal showSignin={showSignIn} setShowSignIn={setShowSignIn} />
+        {showSignIn ? <SignInModal showSignIn={showSignIn} setShowSignIn={setShowSignIn} setUser={setUser} /> : null}
         </>
     )
 }
