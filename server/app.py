@@ -17,6 +17,8 @@ migrate.init_app(app, db)
 def home():
     return ''
 
+
+#Routes handling login, checking cookies, and logout
 @app.route('/api/login', methods=['POST'])
 def login():
     if request.method == 'POST':
@@ -40,10 +42,15 @@ def get_user():
         return jsonify(user.to_dict())
     else:
         return jsonify({'message': '401: Not Authorized'}), 401
+    
+@app.route('/api/logout', methods=['POST'])
+def logout():
+    browser_session.clear()
+    response = make_response(jsonify({'response':'You have successfully logged out'}), 200)
+    response.delete_cookie('browser_session')
+    return response
 
-
-
-
+#route to all users
 @app.route('/api/users', methods=['GET', 'POST'])
 def get_users():
     if request.method == 'GET':
@@ -62,12 +69,14 @@ def get_users():
 
         return make_response(jsonify(new_user.to_dict()), 201)
 
+#route to the constant texts
 @app.route('/api/example_texts')
 def get_example_texts():
     texts = ExampleText.query.all()
     texts_to_dict = [text.to_dict() for text in texts]
     return make_response(jsonify(texts_to_dict), 200)
 
+#route to all texts by username
 @app.route('/api/<string:username>/texts', methods=['GET', 'POST'])
 def get_user_texts(username):
     user = User.query.filter_by(username=username).first()
