@@ -4,6 +4,7 @@ import React from 'react';
 import InputPage from './components/InputPage'
 import { useState, useEffect } from 'react';
 import ConstTextCard from './components/ConstTextCard';
+import Header from './components/Header';
 import UserTextList from './components/UserTextList';
 
 
@@ -38,11 +39,13 @@ function App() {
 
   return (
     <div>
+      <Header />
+      <br></br>
       <NavBar user={user} setUser={setUser}/>
       {constText.map((text) => {
         return <ConstTextCard key={text.id} title={text.title} content={text.text} user={user} />
       })}
-      {/* <UserTextList user={user} userTexts={userTexts} /> */}
+      <UserTextList user={user} userTexts={userTexts} />
       <InputPage />
     </div>
   );
