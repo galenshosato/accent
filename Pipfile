@@ -9,6 +9,7 @@ flask-migrate = "*"
 flask-sqlalchemy = "*"
 sqlalchemy = "*"
 nltk = "*"
+pypdf2 = "*"
 
 [dev-packages]
 

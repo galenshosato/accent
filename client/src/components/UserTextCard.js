@@ -8,7 +8,7 @@ function UserTextCard({text}) {
 
     
     const handleClick = () => {
-    setExpan(!isExpan);
+    setExpan(isExpan);
   };
 
    

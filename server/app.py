@@ -3,6 +3,9 @@ from extensions import *
 from models import User, Text, TextTranscription, ExampleText
 from BE_functions import text_to_IPA, split_text, create_new_tr
 
+import io
+import PyPDF2
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -49,6 +52,19 @@ def logout():
     response = make_response(jsonify({'response':'You have successfully logged out'}), 200)
     response.delete_cookie('browser_session')
     return response
+
+
+@app.route('/api/process_file', methods=['POST'])
+def process_file():
+    file = request.files['file']
+    file_content = file.read()
+
+    pdf_reader = PyPDF2.PdfReader(io.BytesIO(file_content))
+    text = ''
+    for page in range(len(pdf_reader.pages)):
+        text += pdf_reader.pages[page].extract_text()
+    
+    return text
 
 #route to all users
 @app.route('/api/users', methods=['GET', 'POST'])
