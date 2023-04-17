@@ -1,7 +1,7 @@
 import {Form, Button, Card} from 'react-bootstrap'
 import React, {useState} from 'react';
 
-function InputPage() {
+function InputModal() {
     const [file, setFile] = useState(null)
     const [uploadText, setUploadText] = useState('')
 
@@ -33,23 +33,6 @@ function InputPage() {
                     <Form.Control type='text' placeholder='Enter title' />
                 </Form.Group>
                 <br></br>
-                <Form.Group controlId='formFile' className='mb-3'>
-                    <Form.Label>What file would you like to upload?</Form.Label>
-                    <Form.Control type='file' onChange={handleFileChange}/>
-                </Form.Group>
-                <Button variant='primary' type='submit' onClick={handleSubmit}>
-                    Upload
-                </Button>
-            </Form>
-        </Card>
-        <br></br>
-        <Card>
-            <Form>
-                <Form.Group>
-                    <Form.Label>Title</Form.Label>
-                    <Form.Control type='text' placeholder='Enter title' />
-                </Form.Group>
-                <br></br>
                 <Form.Group>
                     <Form.Label>Content</Form.Label>
                     <Form.Control type='textarea' placeholder='Enter content' />
@@ -62,4 +45,4 @@ function InputPage() {
     )
 }
 
-export default InputPage
+export default InputModal

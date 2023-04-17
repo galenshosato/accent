@@ -2,9 +2,8 @@ import React, {useState} from "react";
 import { Button, Card, Container } from 'react-bootstrap';
 import LangChoiceModal from "./LangChoiceModal.js";
 
-function ConstTextCard({title, content, user}) {
+function ConstTextCard({title, content, user, showLangChoice, setShowLangChoice}) {
   const [expanded, setExpanded] = useState(false);
-  const [showLangChoice, setShowLangChoice] = useState(false)
 
   const handleClick = () => {
     setExpanded(!expanded);

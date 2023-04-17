@@ -1,7 +1,7 @@
 import NavBar from './components/NavBar';
 import './App.css';
 import React from 'react';
-import InputPage from './components/InputPage'
+import InputModal from './components/InputModal'
 import { useState, useEffect } from 'react';
 import ConstTextCard from './components/ConstTextCard';
 import Header from './components/Header';
@@ -12,6 +12,8 @@ function App() {
   const [user, setUser] = useState({})
   const [userTexts, setUserTexts] = useState([])
   const [constText, setConstText] = useState([])
+  const [showAddFile, setShowAddFile] = useState(false)
+  const [showLangChoice, setShowLangChoice] = useState(false)
 
 
   useEffect(() => {
@@ -45,8 +47,9 @@ function App() {
       {constText.map((text) => {
         return <ConstTextCard key={text.id} title={text.title} content={text.text} user={user} />
       })}
-      <UserTextList user={user} userTexts={userTexts} />
-      <InputPage />
+      <UserTextList user={user} userTexts={userTexts} showAddFile={showAddFile} setShowAddFile={setShowAddFile} 
+        showLangChoice={showLangChoice} setShowLangChoice={setShowLangChoice} />
+      <InputModal />
     </div>
   );
 }

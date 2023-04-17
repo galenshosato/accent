@@ -116,7 +116,6 @@ function LangChoiceModal({title, content, showLangChoice, setShowLangChoice, use
         })
         .then(resp => resp.json())
         .then(data => setText(data))
-        
     }
 
     
