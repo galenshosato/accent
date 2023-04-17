@@ -28,7 +28,6 @@ function ConstTextCard({title, content, user}) {
           </Card.Text> 
           <Container className='d-flex justify-content-center mb-2 gap-2'>
             <Button onClick={() => setShowLangChoice(true)}>New Accent!</Button>
-            <Button>Transcribe</Button>
           </Container>
         </> 
         )}
