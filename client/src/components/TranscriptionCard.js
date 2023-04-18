@@ -1,8 +1,33 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Card } from "react-bootstrap";
+import ReactAudioPlayer from 'react-audio-player'
 
-function TranscriptionCard({text, tr}) {
+
+function TranscriptionCard({text, tr, lang}) {
     const [trShow, setTrShow] = useState(false)
+    const [audioURL, setAudioURL] = useState('')
+    
+
+    const new_speech = {
+        text: text,
+        language : lang
+    }
+
+    
+
+    useEffect(() => {
+        fetch('/api/text_to_speech', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(new_speech)
+        })
+        .then(resp => resp.blob())
+        .then(data => URL.createObjectURL(data))
+        .then(url => setAudioURL(url))
+    }, [])    
+
     return(
         <>
             <Card>
@@ -16,6 +41,9 @@ function TranscriptionCard({text, tr}) {
                             </div>
                         )
                     })}
+                <ReactAudioPlayer src={audioURL} controls />
+                <br></br>
+                <br></br>
                 <button onClick={() => setTrShow(!trShow)}>
                     {trShow ? "Hide IPA" : "Show IPA"}
                 </button>

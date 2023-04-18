@@ -199,5 +199,35 @@ def create_new_tr(array, lang, id):
         return
 
     
-
+def choose_voice(language_string):
+    if language_string == 'en':
+        return 'Joanna'
+    
+    elif language_string == 'en':
+        return 'Brian'
+    
+    elif language_string == 'Australian':
+        return 'Olivia'
+    
+    elif language_string == 'fr':
+        return 'Lea'
+    
+    elif language_string == 'de':
+        return 'Vicki'
+    
+    elif language_string == 'pt-br':
+        return 'Camila'
+    
+    elif language_string == 'es':
+        return 'Sergio'
+    
+    elif language_string == 'ru':
+        return 'Tatyana'
+    
+    elif language_string == 'ja':
+        return 'Takumi'
+    
+    else:
+        return 'Joanna'
+    
 

@@ -1,10 +1,11 @@
-from flask import Flask, jsonify, request, make_response, session as browser_session
+from flask import Flask, jsonify, request, make_response, Response, session as browser_session
 from extensions import *
 from models import User, Text, TextTranscription, ExampleText
-from BE_functions import text_to_IPA, split_text, create_new_tr
+from BE_functions import text_to_IPA, split_text, create_new_tr, choose_voice
 
 import io
 import PyPDF2
+import boto3
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -65,6 +66,48 @@ def process_file():
         text += pdf_reader.pages[page].extract_text()
     
     return text
+
+
+@app.route('/api/text_to_speech', methods=['POST'])
+def speech_response():
+    data = request.get_json()
+
+    text = data['text']
+    language = data['language']
+
+    if len(text) > 1:
+        new_text = ", ".join(text)
+    else:
+        new_text = text[0]
+
+    voice = choose_voice(language)
+
+    p_session = boto3.Session(
+                    aws_access_key_id='',
+                    aws_secret_access_key='',
+                    region_name='us-east-1')
+
+    polly_client = p_session.client('polly')
+
+    if voice == 'Tatyana':
+        response = polly_client.synthesize_speech(VoiceId= voice,
+                OutputFormat='mp3', 
+                Text = new_text,
+                Engine = 'standard')
+        
+    else:
+        response = polly_client.synthesize_speech(VoiceId = voice,
+                    OutputFormat='mp3',
+                    Text = new_text,
+                    Engine = 'neural')
+    
+    headers = {
+        'Content-Type': 'audio/mpeg',
+        'Content-Disposition': 'attachment; filename=speech.mp3'
+    }
+
+    return Response(response['AudioStream'].read(), headers=headers)
+        
 
 #route to all users
 @app.route('/api/users', methods=['GET', 'POST'])
