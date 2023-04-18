@@ -1,46 +1,42 @@
-import {Form, Button, Card} from 'react-bootstrap'
-import React, {useState} from 'react';
+import {Form, Button, Modal} from 'react-bootstrap'
+import React, {useRef} from 'react';
 
-function InputModal() {
-    const [file, setFile] = useState(null)
-    const [uploadText, setUploadText] = useState('')
+function InputModal({showInput, setShowInput, setTitle, setUploadText, setShowLangChoice}) {
 
-    function handleFileChange(event) {
-        setFile(event.target.files[0]);
-      }
+    const titleRef = useRef(null)
+    const textRef = useRef(null)
 
+    function handleClick(e) {
+        const title = titleRef.current.value
+        const content = textRef.current.value
 
-    function handleSubmit(e) {
-        e.preventDefault()
-        const formData = new FormData()
-        formData.append('file', file)
-        console.log(file)
+        setTitle(title)
+        setUploadText(content)
+        setShowInput(false)
+        setShowLangChoice(true)
 
-        fetch('/api/process_file', {
-            method:'POST',
-            body: formData
-        })
-        .then(resp => resp.text())
-        .then(data => console.log(data))
     }
-
+    
     return (
         <>
-        <Card>
-            <Form>
-                <Form.Group>
-                    <Form.Label>Title</Form.Label>
-                    <Form.Control type='text' placeholder='Enter title' />
-                </Form.Group>
+        <Modal show={showInput} onHide={() => setShowInput(false)} >
+            <Modal.Body>
+                <Modal.Title>Create New Text</Modal.Title>
                 <br></br>
-                <Form.Group>
-                    <Form.Label>Content</Form.Label>
-                    <Form.Control type='textarea' placeholder='Enter content' />
-                </Form.Group>
-                <br></br>
-                <Button variant='primary' type='submit'>Submit</Button>
-            </Form>
-        </Card>
+                <Form>
+                    <Form.Group>
+                        <Form.Control type='text' placeholder='Title' autoFocus ref={titleRef}/>
+                    </Form.Group>
+                    <br></br>
+                    <Form.Group>
+                        <Form.Label>Enter Your Text</Form.Label>
+                        <Form.Control type='textarea' placeholder='Text' ref={textRef} />
+                    </Form.Group>
+                    <br></br>
+                    <Button variant='primary' onClick={handleClick}>Submit</Button>
+                </Form>
+            </Modal.Body>
+        </Modal>
         </>
     )
 }

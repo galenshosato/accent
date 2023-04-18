@@ -3,9 +3,9 @@ import './App.css';
 import React from 'react';
 import InputModal from './components/InputModal'
 import { useState, useEffect } from 'react';
-import ConstTextCard from './components/ConstTextCard';
 import Header from './components/Header';
 import UserTextList from './components/UserTextList';
+import ConstTextList from './components/ConstTextList';
 
 
 function App() {
@@ -13,6 +13,7 @@ function App() {
   const [userTexts, setUserTexts] = useState([])
   const [constText, setConstText] = useState([])
   const [showAddFile, setShowAddFile] = useState(false)
+  const [showInput, setShowInput] = useState(false)
   const [showLangChoice, setShowLangChoice] = useState(false)
 
 
@@ -44,12 +45,9 @@ function App() {
       <Header />
       <br></br>
       <NavBar user={user} setUser={setUser}/>
-      {constText.map((text) => {
-        return <ConstTextCard key={text.id} title={text.title} content={text.text} user={user} />
-      })}
+      <ConstTextList constText={constText} user={user}  />
       <UserTextList user={user} userTexts={userTexts} showAddFile={showAddFile} setShowAddFile={setShowAddFile} 
-        showLangChoice={showLangChoice} setShowLangChoice={setShowLangChoice} />
-      <InputModal />
+        showLangChoice={showLangChoice} setShowLangChoice={setShowLangChoice} showInput={showInput} setShowInput={setShowInput} />
     </div>
   );
 }

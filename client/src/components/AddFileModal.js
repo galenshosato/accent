@@ -1,9 +1,9 @@
 import React, {useState, useRef} from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 import logo from "../images/Accent_logo_small.png"
-import LangChoiceModal from "./LangChoiceModal";
+import InputModal from "./InputModal";
 
-function AddFileModal({showAddFile, setShowAddFile, setTitle, setUploadText, setShowLangChoice}) {
+function AddFileModal({showAddFile, setShowAddFile, setTitle, setUploadText, setShowLangChoice, showInput, setShowInput}) {
     const [file, setFile] = useState(null)
     const titleRef = useRef(null)
 
@@ -29,6 +29,11 @@ function AddFileModal({showAddFile, setShowAddFile, setTitle, setUploadText, set
         setShowAddFile(false)
         setShowLangChoice(true)
     }
+
+    function handleClick(e) {
+        setShowAddFile(false)
+        setShowInput(true)
+    }
     
     
     return (
@@ -50,7 +55,7 @@ function AddFileModal({showAddFile, setShowAddFile, setTitle, setUploadText, set
                 </Form>
                 <br></br>
                 <span>
-                    Input your own text? <span>Click here!</span>
+                    Input your own text? <span onClick={handleClick}>Click here!</span>
                 </span>
                 <br></br>
               <Button variant='primary' onClick={handleSubmit} size="lg">
@@ -58,6 +63,7 @@ function AddFileModal({showAddFile, setShowAddFile, setTitle, setUploadText, set
                     </Button>  
             </Modal.Body>
         </Modal>
+        <InputModal showInput={showInput} setShowInput={setShowInput} setTitle={setTitle} setUploadText={setUploadText} setShowLangChoice={setShowLangChoice} />
         </>
     )
 }

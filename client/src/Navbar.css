@@ -1,0 +1,13 @@
+.dropdown-toggle {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    color: #333;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropdown-toggle:focus {
+    outline: none;
+  }

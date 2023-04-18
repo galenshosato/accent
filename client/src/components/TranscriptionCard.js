@@ -17,7 +17,7 @@ function TranscriptionCard({text, tr}) {
                         )
                     })}
                 <button onClick={() => setTrShow(!trShow)}>
-                    {trShow ? "Hide Translation" : "Show Translation"}
+                    {trShow ? "Hide IPA" : "Show IPA"}
                 </button>
                 </Card.Body>
             </Card>
