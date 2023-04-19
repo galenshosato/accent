@@ -41,6 +41,7 @@ function AddFileModal({showAddFile, setShowAddFile, setTitle, setUploadText, set
         <Modal show={showAddFile} onHide={() => setShowAddFile(false)} >
             <Modal.Body>
                 <img class='modalLogo' src={logo} alt="logo"/>
+                <br></br>
                 <Modal.Title>New Text</Modal.Title>
                 <br></br>
                 <Form>
@@ -54,8 +55,8 @@ function AddFileModal({showAddFile, setShowAddFile, setTitle, setUploadText, set
                     </Form.Group>
                 </Form>
                 <br></br>
-                <span>
-                    Input your own text? <span onClick={handleClick}>Click here!</span>
+                <span className='my-span'>
+                    Input your own text? <span className='pointer'onClick={handleClick}>Click here!</span>
                 </span>
                 <br></br>
               <Button variant='primary' onClick={handleSubmit} size="lg">
@@ -63,7 +64,7 @@ function AddFileModal({showAddFile, setShowAddFile, setTitle, setUploadText, set
                     </Button>  
             </Modal.Body>
         </Modal>
-        <InputModal showInput={showInput} setShowInput={setShowInput} setTitle={setTitle} setUploadText={setUploadText} setShowLangChoice={setShowLangChoice} />
+        <InputModal showInput={showInput} setShowInput={setShowInput} setShowAddFile={setShowAddFile} setTitle={setTitle} setUploadText={setUploadText} setShowLangChoice={setShowLangChoice} />
         </>
     )
 }

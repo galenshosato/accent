@@ -8,8 +8,9 @@ function Header() {
                 <img src={logo} alt="logo" />
                 <h1>ccent</h1>
             </div>
-            <div>
-                
+            <div id="header_text">
+                <span>Designed by Actors</span>
+                <span>Made for Everyone</span>
             </div>
         </div>
     )

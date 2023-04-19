@@ -1,7 +1,8 @@
 import {Form, Button, Modal} from 'react-bootstrap'
 import React, {useRef} from 'react';
+import logo from "../images/Accent_logo_small.png"
 
-function InputModal({showInput, setShowInput, setTitle, setUploadText, setShowLangChoice}) {
+function InputModal({showInput, setShowInput, setTitle, setUploadText, setShowLangChoice, setShowAddFile}) {
 
     const titleRef = useRef(null)
     const textRef = useRef(null)
@@ -16,11 +17,19 @@ function InputModal({showInput, setShowInput, setTitle, setUploadText, setShowLa
         setShowLangChoice(true)
 
     }
+
+    function handleChange(e) {
+        setShowInput(false)
+        setShowAddFile(true)
+        
+    }
     
     return (
         <>
         <Modal show={showInput} onHide={() => setShowInput(false)} >
-            <Modal.Body>
+            <Modal.Body >
+                <img class='modalLogo' src={logo} alt="logo"/>
+                <br></br>
                 <Modal.Title>Create New Text</Modal.Title>
                 <br></br>
                 <Form>
@@ -32,6 +41,10 @@ function InputModal({showInput, setShowInput, setTitle, setUploadText, setShowLa
                         <Form.Label>Enter Your Text</Form.Label>
                         <Form.Control type='textarea' placeholder='Text' ref={textRef} />
                     </Form.Group>
+                    <br></br>
+                    <span className='my-span'>
+                        Upload a file? <span className='pointer' onClick={handleChange}>Click here!</span>
+                    </span>
                     <br></br>
                     <Button variant='primary' onClick={handleClick}>Submit</Button>
                 </Form>

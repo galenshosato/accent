@@ -1,10 +1,12 @@
 import {useState} from "react";
 import {Modal, Form} from 'react-bootstrap'
 import SignInModal from "./SignInModal";
+import { useNavigate } from "react-router-dom";
 
-function LoginForm({setUser}) {
+function LoginForm({setUser, user}) {
     const [showLogin, setShowLogin] = useState(false)
     const [showSignIn, setShowSignIn] = useState(false)
+    const navigate = useNavigate()
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -24,11 +26,12 @@ function LoginForm({setUser}) {
         })
         .then(resp => resp.json())
         .then(data => setUser(data))
-
+        
         setShowLogin(false)
         
+        
     }
-
+    
     function handleClick (e) {
         setShowLogin(false)
         setShowSignIn(true)

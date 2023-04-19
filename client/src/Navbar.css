@@ -11,3 +11,15 @@
   .dropdown-toggle:focus {
     outline: none;
   }
+
+  #Navlogo {
+    width: 4.5rem;
+  }
+  
+  #exampleLink {
+    margin-right: 100px;
+    font-style: oblique;
+    font-weight: bold;
+  }
+  
+  

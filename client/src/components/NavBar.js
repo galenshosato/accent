@@ -1,10 +1,12 @@
-import Navbar from 'react-bootstrap/Navbar'
-import Container from 'react-bootstrap/Container'
-import Nav from 'react-bootstrap/Nav'
 import React from 'react'
 import LoginForm from './LoginForm'
+import logo from "../images/Accent_logo_small.png"
+import { Container, Nav, Navbar } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+import '../Navbar.css'
 
 function NavBar({user, setUser}) {
+    const navigate = useNavigate()
    
     function handleLogout () {
         fetch('/api/logout', {
@@ -12,20 +14,22 @@ function NavBar({user, setUser}) {
         })
 
         setUser('')
+        navigate('/examples')
     }
 
     return (
         <>
         <Navbar bg="light" variant="light">
-         <Container>
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+         <Container fluid style={{maxWidth: "1600px"}}>
+            <Navbar.Brand href="/" ><img id='Navlogo' src={logo} alt='logo' /></Navbar.Brand>
             <Nav className="me-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#features">Features</Nav.Link>
-                <Nav.Link href="#pricing">Pricing</Nav.Link>
+                <Nav.Link href={`/${user.username}`}>Home</Nav.Link>
              </Nav>
-            {user.name ? <Navbar.Text>Welcome, {user.name}!</Navbar.Text> : <LoginForm setUser={setUser}/>}
+             <Nav>
+                <Nav.Link id="exampleLink" href='/examples'>Example texts</Nav.Link>
+            {user.name ? <Navbar.Text>Welcome, {user.name}!</Navbar.Text> : <LoginForm setUser={setUser} user={user}/>}
             {user.name ? <button onClick={handleLogout}>Logout</button> : null}
+             </Nav>
          </Container>
       </Navbar>
         </>

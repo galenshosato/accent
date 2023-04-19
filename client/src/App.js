@@ -1,12 +1,12 @@
 import NavBar from './components/NavBar';
 import './App.css';
 import React from 'react';
-import InputModal from './components/InputModal'
 import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import UserTextList from './components/UserTextList';
 import ConstTextList from './components/ConstTextList';
 
+import {Route, Routes, useNavigate} from 'react-router-dom'
 
 function App() {
   const [user, setUser] = useState({})
@@ -45,9 +45,11 @@ function App() {
       <Header />
       <br></br>
       <NavBar user={user} setUser={setUser}/>
-      <ConstTextList constText={constText} user={user}  />
-      <UserTextList user={user} userTexts={userTexts} showAddFile={showAddFile} setShowAddFile={setShowAddFile} 
-        showLangChoice={showLangChoice} setShowLangChoice={setShowLangChoice} showInput={showInput} setShowInput={setShowInput} />
+      <Routes>
+        <Route element={<ConstTextList constText={constText} user={user} showLangChoice={showLangChoice} setShowLangChoice={setShowLangChoice} />} path='/examples' />
+        <Route element={<UserTextList user={user} userTexts={userTexts} showAddFile={showAddFile} setShowAddFile={setShowAddFile} 
+        showLangChoice={showLangChoice} setShowLangChoice={setShowLangChoice} showInput={showInput} setShowInput={setShowInput} />} path={`${user.username}`} />
+      </Routes>
     </div>
   );
 }

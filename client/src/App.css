@@ -4,6 +4,7 @@
    justify-content: center;
    align-items: flex-end;
    position: relative;
+   transform: translate(.5%);
 }
 
 .header img {
@@ -18,3 +19,39 @@
     font-size: 2.5rem;
     transform: translate(46%);
   }
+
+#header_text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#header_text::before, #header_text::after {
+  content: "";
+  flex: 1;
+}
+
+#header_text span {
+  margin: 0 20px;
+  transform: translate(-10%);
+  font-family: Lucida Handwriting;
+  font-size: small;
+}
+
+.modalLogo {
+  display: block;
+  width: 4rem;
+}
+
+.my-span {
+  position: absolute;
+  right: 10px;
+}
+
+.pointer {
+  cursor: pointer;
+  font-style: italic;
+  color: blue;
+  text-decoration: underline;
+}

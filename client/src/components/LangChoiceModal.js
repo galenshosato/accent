@@ -122,23 +122,27 @@ function LangChoiceModal({title, content, showLangChoice, setShowLangChoice, use
     return (
         <>
         <Modal centered scrollable show={showLangChoice} onHide={() => setShowLangChoice(false)}> 
-            <Modal.Header className="justify-content-center">{title}</Modal.Header>
+            <Modal.Header className="justify-content-center">
+                <Modal.Title>
+                {title}
+                </Modal.Title>
+            </Modal.Header>
             <Modal.Body>
                 Choose An Accent:
                 <p></p>
                 <div className="d-flex mb-2 gap-2">
                     {baseLang.map((lang) => {
-                        return <Button onClick={() => {setBasicLang(lang); langClick(lang)}}>{lang}</Button>
+                        return <Button key={lang.id} onClick={() => {setBasicLang(lang); langClick(lang)}}>{lang}</Button>
                     })}
                 </div>
                 {basicLang ? <div className="d-flex mb-2 gap-2">
                     {langChoice.map((lang) => {
-                        return <Button onClick={() => {setCountry(lang); langClick(lang)}}>{lang}</Button>
+                        return <Button key={lang.id}  onClick={() => {setCountry(lang); langClick(lang)}}>{lang}</Button>
                     })}
                 </div> : null}
                 {country ? <div className="d-flex mb-2 gap-2">
                     {countryChoice.map((lang) => {
-                        return <Button onClick={() => {setDialect(lang); langClick(lang)}}>{lang}</Button>
+                        return <Button key={lang.id}  onClick={() => {setDialect(lang); langClick(lang)}}>{lang}</Button>
                     })}
                 </div> : null}
             </Modal.Body>
