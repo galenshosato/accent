@@ -26,6 +26,7 @@ function LoginForm({setUser, user}) {
         })
         .then(resp => resp.json())
         .then(data => setUser(data))
+        .then(() => navigate('/user'))
         
         setShowLogin(false)
         
@@ -60,12 +61,14 @@ function LoginForm({setUser, user}) {
                 <br></br>
                 <div>
                     <span>
-                        Don't have an account? <span onClick={handleClick}>Sign Up!</span>
+                        Don't have an account? <span className='pointer' onClick={handleClick}>Sign Up!</span>
                     </span>
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <button onClick={handleSubmit}>Submit</button>
+                <a href={`/${user.username}`}>
+                <button onClick={handleSubmit}>Login!</button>
+                </a>
             </Modal.Footer>
         </Modal>
         {showSignIn ? <SignInModal showSignIn={showSignIn} setShowSignIn={setShowSignIn} setUser={setUser} /> : null}

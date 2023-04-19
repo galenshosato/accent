@@ -4,9 +4,18 @@ import AddFileModal from "./AddFileModal"
 import LangChoiceModal from "./LangChoiceModal"
 import { Button, Container } from "react-bootstrap"
 
-function UserTextList({user, userTexts, showAddFile, setShowAddFile, showLangChoice, setShowLangChoice, showInput, setShowInput}) {
+function UserTextList({user, setUserTexts, userTexts, showAddFile, setShowAddFile, showLangChoice, setShowLangChoice, showInput, setShowInput}) {
     const [title, setTitle] = useState('')
     const [uploadText, setUploadText] = useState('')
+
+    useEffect(() => {
+        fetch(`/api/${user.username}/texts`)
+        .then(resp => resp.json())
+        .then(data => setUserTexts(data))
+      }, [user])
+
+
+    
 
 
     function handleClick(e) {
@@ -14,19 +23,21 @@ function UserTextList({user, userTexts, showAddFile, setShowAddFile, showLangCho
     }
 
     return (
-        <div>
-            <Container class='cards'>
-            {userTexts.map(text => {
-                return <UserTextCard key={text.id} text={text} />
-            })}
-            </Container>
-            <Container id="userTxtBtn">
-            <Button onClick={handleClick}>Add A New Text</Button>
-            </Container>
+        <>
+            <div style={{height: '100vh'}}>
+                <Container style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '30px'}}>
+                    {userTexts.map(text => {
+                        return <UserTextCard key={text.id} text={text} />
+                    })}
+                </Container>
+                <Container className='d-flex justify-content-center align-items-center' style={{marginTop:'20px'}}>
+                <Button onClick={handleClick}>Add A New Text</Button>
+                </Container>
+            </div>    
             <AddFileModal showAddFile={showAddFile} setShowAddFile={setShowAddFile} setUploadText={setUploadText} 
                 setTitle={setTitle} setShowLangChoice={setShowLangChoice} showInput={showInput} setShowInput={setShowInput} />
-            <LangChoiceModal title={title} content={uploadText} showLangChoice={showLangChoice} setShowLangChoice={setShowLangChoice}/>
-        </div>
+            <LangChoiceModal user={user} title={title} content={uploadText} userTexts={userTexts} setUserTexts={setUserTexts} showLangChoice={showLangChoice} setShowLangChoice={setShowLangChoice}/>
+        </>
     )
 }
 

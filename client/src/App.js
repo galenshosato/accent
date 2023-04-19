@@ -6,7 +6,7 @@ import Header from './components/Header';
 import UserTextList from './components/UserTextList';
 import ConstTextList from './components/ConstTextList';
 
-import {Route, Routes, useNavigate} from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
 
 function App() {
   const [user, setUser] = useState({})
@@ -32,23 +32,17 @@ function App() {
     .then(data => setConstText(data))
   }, [])
 
-  useEffect(() => {
-    fetch(`/api/gmoney/texts`)
-    .then(resp => resp.json())
-    .then(data => setUserTexts(data))
-  }, [])
-
 
 
   return (
-    <div>
+    <div className='app'>
       <Header />
       <br></br>
       <NavBar user={user} setUser={setUser}/>
       <Routes>
         <Route element={<ConstTextList constText={constText} user={user} showLangChoice={showLangChoice} setShowLangChoice={setShowLangChoice} />} path='/examples' />
-        <Route element={<UserTextList user={user} userTexts={userTexts} showAddFile={showAddFile} setShowAddFile={setShowAddFile} 
-        showLangChoice={showLangChoice} setShowLangChoice={setShowLangChoice} showInput={showInput} setShowInput={setShowInput} />} path={`${user.username}`} />
+        <Route element={<UserTextList user={user} setUserTexts={setUserTexts} userTexts={userTexts} showAddFile={showAddFile} setShowAddFile={setShowAddFile} 
+        showLangChoice={showLangChoice} setShowLangChoice={setShowLangChoice} showInput={showInput} setShowInput={setShowInput} />} path={`/user`} />
       </Routes>
     </div>
   );

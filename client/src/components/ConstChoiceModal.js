@@ -2,7 +2,7 @@ import { Modal, Button } from "react-bootstrap"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 
-function LangChoiceModal({title, content, showLangChoice, setShowLangChoice, userTexts, setUserTexts, user}) {
+function ConstChoiceModal({title, content, showConstChoice, setShowConstChoice, user}) {
     const [basicLang, setBasicLang] = useState()
     const [selectedButton, setSelectedButton] = useState(false);
     const [selectedButton2, setSelectedButton2] = useState(false);
@@ -138,10 +138,7 @@ function LangChoiceModal({title, content, showLangChoice, setShowLangChoice, use
         })
         .then(resp => resp.json())
         .then(data => setText(data))
-        .then(() => window.location.reload() )
-        
-
-        
+        .then(() => navigate('/user'))
     }
 
     function handleSelect (lang) {
@@ -174,7 +171,7 @@ function LangChoiceModal({title, content, showLangChoice, setShowLangChoice, use
     
     return (
         <>
-        <Modal centered scrollable show={showLangChoice} onHide={() => setShowLangChoice(false)}> 
+        <Modal centered scrollable show={showConstChoice} onHide={() => setShowConstChoice(false)}> 
             <Modal.Header className="justify-content-center">
                 <Modal.Title>
                 {title}
@@ -200,11 +197,11 @@ function LangChoiceModal({title, content, showLangChoice, setShowLangChoice, use
                 </div> : null}
             </Modal.Body>
             {langChoice ? <Modal.Footer>
-                <Button onClick={() => {handleNewTr(); setShowLangChoice(false)}}>We're doing {dialect}</Button>
+                <Button onClick={() => {handleNewTr(); setShowConstChoice(false)}}>We're doing {dialect}</Button>
             </Modal.Footer> : null}
         </Modal>
         </>
     )
 }
 
-export default LangChoiceModal
+export default ConstChoiceModal

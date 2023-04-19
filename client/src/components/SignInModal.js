@@ -36,7 +36,7 @@ function SignInModal({showSignIn, setShowSignIn, setUser}) {
 
     return(
         <>
-         <Modal show={showSignIn} onHide={() => setShowSignIn(false)} >
+         <Modal centered show={showSignIn} onHide={() => setShowSignIn(false)} >
             <Modal.Body>
                 <Modal.Title>Create your account</Modal.Title>
                 <br></br>
@@ -59,7 +59,7 @@ function SignInModal({showSignIn, setShowSignIn, setUser}) {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <button onClick={handleSubmit}>Submit</button>
+                <button onClick={handleSubmit}>Sign Up!</button>
             </Modal.Footer>
          </Modal>
         </>

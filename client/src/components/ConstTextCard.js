@@ -1,20 +1,28 @@
 import React, {useState} from "react";
 import { Button, Card, Container } from 'react-bootstrap';
-import LangChoiceModal from "./LangChoiceModal.js";
+import ConstChoiceModal from "./ConstChoiceModal.js";
 
-function ConstTextCard({title, content, user, showLangChoice, setShowLangChoice}) {
-  const [expanded, setExpanded] = useState(false);
+function ConstTextCard({title, content, user}) {
+  const [expanded, setExpanded] = useState(false)
+  const [showConstChoice, setShowConstChoice] = useState(false)
+
 
   const handleClick = () => {
     setExpanded(!expanded);
   };
 
+  const cardStyle = {
+    width: expanded ? '80%' : 'calc((40% - 10px) / 2)',
+    height: expanded ? '85%' : '100px',
+    marginTop: '30px',
+    marginBottom: '10px',
+  }
 
   return (
     <>
-    <Card onClick={handleClick}>
+    <Card onClick={handleClick} style={cardStyle}>
       <Card.Body>
-        <Card.Title className={expanded ? 'text-center mb-3' : 'text-center'}>{title}</Card.Title>
+        <Card.Title className={expanded ? 'text-center mb-3 title' : 'text-center title'}>{title}</Card.Title>
         {expanded && (
           <>
           <Card.Text className="text-center">
@@ -26,13 +34,13 @@ function ConstTextCard({title, content, user, showLangChoice, setShowLangChoice}
             ))}
           </Card.Text> 
           <Container className='d-flex justify-content-center mb-2 gap-2'>
-            <Button onClick={() => setShowLangChoice(true)}>New Accent!</Button>
+            <Button onClick={() => setShowConstChoice(true)}>New Accent!</Button>
           </Container>
         </> 
         )}
       </Card.Body>
     </Card>
-    <LangChoiceModal showLangChoice={showLangChoice} setShowLangChoice={setShowLangChoice} title={title} content={content} user={user}/>
+    <ConstChoiceModal showConstChoice={showConstChoice} setShowConstChoice={setShowConstChoice} title={title} content={content} user={user}/>
     </>
   );
 }

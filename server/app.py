@@ -194,11 +194,12 @@ def get_trs_for_text(username, id):
     
     elif request.method == 'POST':
         data = request.get_json()
+        dialect = data['dialect']
         lang = data['language']
         text_content = data['text']
 
-        split = split_text(text_content, lang)
-        new_tt = create_new_tr(split, lang, id)
+        split = split_text(text_content, lang, dialect)
+        new_tt = create_new_tr(split, lang, dialect, id)
         
         db.session.add(new_tt)
         db.session.commit()

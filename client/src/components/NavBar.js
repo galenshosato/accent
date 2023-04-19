@@ -23,7 +23,7 @@ function NavBar({user, setUser}) {
          <Container fluid style={{maxWidth: "1600px"}}>
             <Navbar.Brand href="/" ><img id='Navlogo' src={logo} alt='logo' /></Navbar.Brand>
             <Nav className="me-auto">
-                <Nav.Link href={`/${user.username}`}>Home</Nav.Link>
+                <Nav.Link href='/user'>Home</Nav.Link>
              </Nav>
              <Nav>
                 <Nav.Link id="exampleLink" href='/examples'>Example texts</Nav.Link>

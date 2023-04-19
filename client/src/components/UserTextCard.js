@@ -1,30 +1,48 @@
 import React, {useState} from "react"
-import { Card } from "react-bootstrap"
+import { Card, Button } from "react-bootstrap"
 import TranscriptionCard from "./TranscriptionCard"
 
 function UserTextCard({text}) {
     const [isExpan, setExpan] = useState(false)
+    const buttons = text.transcriptions
     const trs = text.transcriptions[0]
     const lang = trs.language
+    
 
     
-    const handleClick = () => {
-    setExpan(true);
+    function handleClick(e) {
+    setExpan(!isExpan);
   };
+
+  const cardStyle = {
+    width: isExpan ? '80%' : 'calc((40% - 10px) / 2)',
+    height: isExpan ? '85%' : '125px',
+    marginTop: '30px',
+    marginBottom: '10px',
+  }
 
    
 
   return (
     <>
-    <Card onClick={handleClick}>
+    <Card style={cardStyle}>
       <Card.Body>
-        <Card.Title className={isExpan ? 'text-center mb-3' : 'text-center'}>{text['text_title']}</Card.Title>
+        <Card.Title className={isExpan ? 'text-center mb-3 title' : 'text-center title'}>{text['text_title']}</Card.Title>
+        <div className='d-flex justify-content-center align-items-center' style={{marginBottom: '10px', gap: '10px'}}>
+        {buttons.map(button => {
+           return <Button key={button.id} onClick={handleClick} size="sm" variant="outline-primary">{button.dialect}</Button>
+        })}
+        </div>
+        <div className='d-flex justify-content-center align-items-center'>
+        <Button size="sm" variant='outline-dark'>+</Button>
+        </div>
+        
         {isExpan && (
             <>
             <TranscriptionCard text={trs.text1} tr={trs.tr1} lang={lang} />
-            <TranscriptionCard text={trs.text2} tr={trs.tr2} lang={lang} />
-            <TranscriptionCard text={trs.text3} tr={trs.tr3} lang={lang}/>
-            <TranscriptionCard text={trs.text4} tr={trs.tr4} lang={lang} />
+            {trs.text2 && trs.tr2 ? <TranscriptionCard text={trs.text2} tr={trs.tr2} lang={lang} /> : null}
+            {trs.text3 && trs.tr3 ? <TranscriptionCard text={trs.text3} tr={trs.tr3} lang={lang} /> : null}
+            {trs.text4 && trs.tr4 ? <TranscriptionCard text={trs.text4} tr={trs.tr4} lang={lang} /> : null}
             {trs.text5 && trs.tr5 ? <TranscriptionCard text={trs.text5} tr={trs.tr5} lang={lang} /> : null}
             {trs.text6 && trs.tr6 ? <TranscriptionCard text={trs.text6} tr={trs.tr6} lang={lang} /> : null}
             {trs.text7 && trs.tr7 ? <TranscriptionCard text={trs.text7} tr={trs.tr7} lang={lang} /> : null}

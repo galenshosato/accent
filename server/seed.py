@@ -39,7 +39,7 @@ if __name__ == '__main__':
         print("Seeding transcriptions")
 
         split = split_text(text1, "en-us")
-        new_tt = create_new_tr(split, "en-us", 1)
+        new_tt = create_new_tr(split, "en-us", "General American", 1)
 
         db.session.add(new_tt)
         db.session.commit()

@@ -62,6 +62,7 @@ class TextTranscription(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     language = db.Column(db.String)
+    dialect = db.Column(db.String)
     text1 = db.Column(JSON)
     tr1 = db.Column(JSON)
     text2 = db.Column(JSON)
@@ -82,6 +83,7 @@ class TextTranscription(db.Model):
         return {
             "id": self.id,
             "language": self.language,
+            "dialect": self.dialect,
             "text1": self.text1,
             "tr1": self.tr1,
             "text2": self.text2,

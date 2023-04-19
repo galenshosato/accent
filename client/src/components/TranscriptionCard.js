@@ -26,7 +26,11 @@ function TranscriptionCard({text, tr, lang}) {
         .then(resp => resp.blob())
         .then(data => URL.createObjectURL(data))
         .then(url => setAudioURL(url))
-    }, [])    
+    }, [])
+    
+    function handleClick(e) {
+        setTrShow(!trShow)
+    }
 
     return(
         <>
@@ -44,7 +48,7 @@ function TranscriptionCard({text, tr, lang}) {
                 <ReactAudioPlayer src={audioURL} controls />
                 <br></br>
                 <br></br>
-                <button onClick={() => setTrShow(!trShow)}>
+                <button onClick={handleClick}>
                     {trShow ? "Hide IPA" : "Show IPA"}
                 </button>
                 </Card.Body>
