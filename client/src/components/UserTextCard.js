@@ -15,6 +15,7 @@ function UserTextCard({text}) {
   };
 
   const cardStyle = {
+    maxWidth: '100%',
     width: isExpan ? '80%' : 'calc((40% - 10px) / 2)',
     height: isExpan ? '85%' : '125px',
     marginTop: '30px',
