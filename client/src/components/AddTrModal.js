@@ -122,8 +122,8 @@ function AddTrModal({title, content, user, id, showAddTrModal, setShowAddTrModal
                 })
             })
         .then(resp => resp.json())
-        .then(data => console.log(data))
-        // .then(() => window.location.reload() )
+        .then(data => setText(data))
+        .then(() => window.location.reload() )
         
 
         
