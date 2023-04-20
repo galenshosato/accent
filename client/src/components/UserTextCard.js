@@ -82,13 +82,13 @@ function UserTextCard({text, user}) {
         
         {isExpan && (
             <>
-            <TranscriptionCard text={tr.text1} tr={tr.tr1} lang={lang} />
-            {tr.text2 && tr.tr2 ? <TranscriptionCard text={tr.text2} tr={tr.tr2} lang={lang} /> : null}
-            {tr.text3 && tr.tr3 ? <TranscriptionCard text={tr.text3} tr={tr.tr3} lang={lang} /> : null}
-            {tr.text4 && tr.tr4 ? <TranscriptionCard text={tr.text4} tr={tr.tr4} lang={lang} /> : null}
-            {tr.text5 && tr.tr5 ? <TranscriptionCard text={tr.text5} tr={tr.tr5} lang={lang} /> : null}
-            {tr.text6 && tr.tr6 ? <TranscriptionCard text={tr.text6} tr={tr.tr6} lang={lang} /> : null}
-            {tr.text7 && tr.tr7 ? <TranscriptionCard text={tr.text7} tr={tr.tr7} lang={lang} /> : null}
+            <TranscriptionCard text={tr.text1} tr={tr.tr1} lang={lang} user={user} />
+            {tr.text2 && tr.tr2 ? <TranscriptionCard text={tr.text2} tr={tr.tr2} lang={lang} user={user} /> : null}
+            {tr.text3 && tr.tr3 ? <TranscriptionCard text={tr.text3} tr={tr.tr3} lang={lang} user={user} /> : null}
+            {tr.text4 && tr.tr4 ? <TranscriptionCard text={tr.text4} tr={tr.tr4} lang={lang} user={user} /> : null}
+            {tr.text5 && tr.tr5 ? <TranscriptionCard text={tr.text5} tr={tr.tr5} lang={lang} user={user} /> : null}
+            {tr.text6 && tr.tr6 ? <TranscriptionCard text={tr.text6} tr={tr.tr6} lang={lang} user={user} /> : null}
+            {tr.text7 && tr.tr7 ? <TranscriptionCard text={tr.text7} tr={tr.tr7} lang={lang} user={user} /> : null}
             </> 
         )}
       </Card.Body>

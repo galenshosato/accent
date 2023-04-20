@@ -40,12 +40,14 @@ function App() {
       <Header />
       <br></br>
       <NavBar user={user} setUser={setUser}/>
+      <div>
       <Routes>
         <Route element={<Home />} path='/' />
         <Route element={<ConstTextList constText={constText} user={user} showLangChoice={showLangChoice} setShowLangChoice={setShowLangChoice} />} path='/examples' />
         <Route element={<UserTextList user={user} setUserTexts={setUserTexts} userTexts={userTexts} showAddFile={showAddFile} setShowAddFile={setShowAddFile} 
-        showLangChoice={showLangChoice} setShowLangChoice={setShowLangChoice} showInput={showInput} setShowInput={setShowInput} />} path={`/user`} />
+        showLangChoice={showLangChoice} setShowLangChoice={setShowLangChoice} showInput={showInput} setShowInput={setShowInput} />} path={`/user`} /> 
       </Routes>
+      </div>
     </div>
   );
 }

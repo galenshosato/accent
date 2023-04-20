@@ -42,7 +42,7 @@ function LoginForm({setUser, user}) {
 
     return (
         <>
-        <button onClick={() => setShowLogin(true)}>Login/Sign Up</button>
+        <button id='login' onClick={() => setShowLogin(true)}>Login/Sign Up</button>
         <Modal centered show={showLogin} onHide={() => setShowLogin(false)}>
             <Modal.Header>
                 <img class='modalLogo' src={logo} alt="logo"/>

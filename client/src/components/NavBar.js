@@ -14,7 +14,7 @@ function NavBar({user, setUser}) {
         })
 
         setUser('')
-        navigate('/examples')
+        navigate('/')
     }
 
     return (
@@ -27,7 +27,7 @@ function NavBar({user, setUser}) {
                 <Nav.Link id="exampleLink" href='/examples'>Examples</Nav.Link>
              </Nav>
              <Nav> 
-            {user.name ? <><Navbar.Text id='welcome'>Welcome, {user.name}!</Navbar.Text></> : <LoginForm setUser={setUser} user={user}/>}
+            {user.name ? <><Navbar.Text id='welcome'>Welcome, {user.name}!</Navbar.Text></> : <LoginForm id='login' setUser={setUser} user={user}/>}
             {user.name ? <button id='logout' onClick={handleLogout}>Logout</button> : null}
              </Nav>
          </Container>

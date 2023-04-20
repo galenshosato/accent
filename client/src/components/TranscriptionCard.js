@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import ReactAudioPlayer from 'react-audio-player'
 
 
-function TranscriptionCard({text, tr, lang}) {
+function TranscriptionCard({text, tr, lang, dialect, user}) {
     const [trShow, setTrShow] = useState(false)
     const [audioURL, setAudioURL] = useState('')
     
@@ -34,7 +34,8 @@ function TranscriptionCard({text, tr, lang}) {
 
     return(
         <>
-            <Card>
+            <Card style={user ? null : {border: '2px solid rgb(105, 87, 80)'}}>
+                {user ? null : <Card.Header className="homeHeader">{dialect}</Card.Header> }
                 <Card.Body>
                     {text.map((t, index) => {
                         return (

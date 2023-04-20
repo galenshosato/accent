@@ -14,7 +14,7 @@ body {
 }
 
 .cards {
-    border: 2px solid olive;
+    border: 2px solid rgb(105, 87, 80);
     border-radius: 10px;
   }
 
@@ -64,3 +64,21 @@ body {
 .mod-titles {
     font-family: 'Lucida Sans';
 }
+
+
+.testCols {
+    margin-top: 2%;
+}
+
+.homeHeader {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+#login {
+    border-radius: 8px;
+}
+
