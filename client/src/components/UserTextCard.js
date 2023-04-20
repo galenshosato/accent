@@ -1,9 +1,12 @@
 import React, {useState} from "react"
 import { Card, Button } from "react-bootstrap"
 import TranscriptionCard from "./TranscriptionCard"
+import AddTrModal from "./AddTrModal"
 
-function UserTextCard({text}) {
+function UserTextCard({text, user}) {
     const [isExpan, setExpan] = useState(false)
+    const [showAddTrModal, setShowAddTrModal] = useState(false)
+
     const buttons = text.transcriptions
     const trs = text.transcriptions[0]
     const lang = trs.language
@@ -14,13 +17,19 @@ function UserTextCard({text}) {
     setExpan(!isExpan);
   };
 
-  const cardStyle = {
-    maxWidth: '100%',
-    width: isExpan ? '80%' : 'calc((40% - 10px) / 2)',
-    height: isExpan ? '85%' : '125px',
-    marginTop: '30px',
-    marginBottom: '10px',
-  }
+    function handleShowTr(e) {
+      console.log(e.target)
+      setShowAddTrModal(true)
+    }
+
+
+    const cardStyle = {
+      maxWidth: '100%',
+      width: isExpan ? '80%' : 'calc((40% - 10px) / 2)',
+      height: isExpan ? '85%' : '125px',
+      marginTop: '30px',
+      marginBottom: '10px',
+    }
 
    
 
@@ -35,7 +44,7 @@ function UserTextCard({text}) {
         })}
         </div>
         <div className='d-flex justify-content-center align-items-center'>
-        <Button size="sm" variant='outline-dark'>+</Button>
+        <Button size="sm" variant='outline-dark' onClick={handleShowTr}>+</Button>
         </div>
         
         {isExpan && (
@@ -51,6 +60,7 @@ function UserTextCard({text}) {
         )}
       </Card.Body>
     </Card>
+    <AddTrModal id={text.id} title={text['text_title']} content={text['text_content']} showAddTrModal={showAddTrModal} setShowAddTrModal={setShowAddTrModal} user={user}/>
     </>
     )
 }

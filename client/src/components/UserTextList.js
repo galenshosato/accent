@@ -27,7 +27,7 @@ function UserTextList({user, setUserTexts, userTexts, showAddFile, setShowAddFil
             <div style={{height: '100vh'}}>
                 <Container style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '30px'}}>
                     {userTexts.map(text => {
-                        return <UserTextCard key={text.id} text={text} />
+                        return <UserTextCard key={text.id} text={text} user={user} />
                     })}
                 </Container>
                 <Container className='d-flex justify-content-center align-items-center' style={{marginTop:'20px'}}>
