@@ -20,7 +20,7 @@ function ConstTextCard({title, content, user}) {
 
   return (
     <>
-    <Card onClick={handleClick} style={cardStyle}>
+    <Card onClick={handleClick} style={cardStyle} className="cards">
       <Card.Body>
         <Card.Title className={expanded ? 'text-center mb-3 title' : 'text-center title'}>{title}</Card.Title>
         {expanded && (
@@ -34,7 +34,7 @@ function ConstTextCard({title, content, user}) {
             ))}
           </Card.Text> 
           <Container className='d-flex justify-content-center mb-2 gap-2'>
-            <Button onClick={() => setShowConstChoice(true)}>New Accent!</Button>
+            <Button className="custom-btn" onClick={() => setShowConstChoice(true)}>New Accent!</Button>
           </Container>
         </> 
         )}

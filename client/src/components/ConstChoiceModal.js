@@ -173,7 +173,7 @@ function ConstChoiceModal({title, content, showConstChoice, setShowConstChoice, 
         <>
         <Modal centered scrollable show={showConstChoice} onHide={() => setShowConstChoice(false)}> 
             <Modal.Header className="justify-content-center">
-                <Modal.Title>
+                <Modal.Title className="mod-titles">
                 {title}
                 </Modal.Title>
             </Modal.Header>
@@ -182,22 +182,22 @@ function ConstChoiceModal({title, content, showConstChoice, setShowConstChoice, 
                 <p></p>
                 <div className="d-flex mb-2 gap-2">
                     {baseLang.map((lang) => {
-                        return <Button key={lang}  variant={lang === selectedButton ? 'primary' : 'outline-primary'} onClick={() => {setBasicLang(lang); langClick(lang); handleSelect(lang); setDialect(lang)}}>{lang}</Button>
+                        return <Button key={lang}  className={lang === selectedButton ? 'custom-btn-active' : 'custom-btn-outline'} onClick={() => {setBasicLang(lang); langClick(lang); handleSelect(lang); setDialect(lang)}}>{lang}</Button>
                     })}
                 </div>
                 {basicLang ? <div className="d-flex mb-2 gap-2">
                     {langChoice.map((lang) => {
-                        return <Button  key={lang} variant={lang === selectedButton2 ? 'primary' : 'outline-primary'}  onClick={() => {setCountry(lang); langClick(lang); handleSelect2(lang); setDialect(lang)}}>{lang}</Button>
+                        return <Button  key={lang} className={lang === selectedButton2 ? 'custom-btn-active' : 'custom-btn-outline'}  onClick={() => {setCountry(lang); langClick(lang); handleSelect2(lang); setDialect(lang)}}>{lang}</Button>
                     })}
                 </div> : null}
                 {country ? <div className="d-flex mb-2 gap-2">
                     {countryChoice.map((lang) => {
-                        return <Button key={lang} variant={lang === selectedButton3 ? 'primary' : 'outline-primary'}  onClick={() => {setDialect(lang); langClick(lang); handleSelect3(lang); setDialect(lang)}}>{lang}</Button>
+                        return <Button key={lang} className={lang === selectedButton3 ? 'custom-btn-active' : 'custom-btn-outline'}  onClick={() => {setDialect(lang); langClick(lang); handleSelect3(lang); setDialect(lang)}}>{lang}</Button>
                     })}
                 </div> : null}
             </Modal.Body>
             {langChoice ? <Modal.Footer>
-                <Button onClick={() => {handleNewTr(); setShowConstChoice(false)}}>We're doing {dialect}</Button>
+                <Button className="custom-btn" onClick={() => {handleNewTr(); setShowConstChoice(false)}}>We're doing {dialect}</Button>
             </Modal.Footer> : null}
         </Modal>
         </>

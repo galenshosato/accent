@@ -1,5 +1,6 @@
 import React, {useRef} from "react";
-import {Modal, Form} from 'react-bootstrap'
+import {Modal, Form, Button} from 'react-bootstrap'
+import logo from "../images/Accent_logo_small.png"
 
 function SignInModal({showSignIn, setShowSignIn, setUser}) {
     const nameRef = useRef(null)
@@ -37,29 +38,36 @@ function SignInModal({showSignIn, setShowSignIn, setUser}) {
     return(
         <>
          <Modal centered show={showSignIn} onHide={() => setShowSignIn(false)} >
+            <Modal.Header>
+                <img class='modalLogo' src={logo} alt="logo"/>
+            </Modal.Header>
             <Modal.Body>
-                <Modal.Title>Create your account</Modal.Title>
+                <Modal.Title className="mod-titles">Create your account</Modal.Title>
                 <br></br>
                 <Form id='sign-in-form'>
                     <Form.Group id="signInName">
-                        <Form.Control size='lg' type="text" placeholder="Name" ref={nameRef} autoFocus />
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control size='md' type="text" placeholder="Enter name" ref={nameRef} autoFocus />
                     </Form.Group>
                     <br></br>
                     <Form.Group id="signInUserName">
-                        <Form.Control size='lg' type="text" placeholder="Username" ref={usernameRef} />
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control size='md' type="text" placeholder="Enter username" ref={usernameRef} />
                     </Form.Group>
                     <br></br>
                     <Form.Group id="signInEmail">
-                        <Form.Control size='lg' type="email" placeholder="Email" ref={emailRef} />
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control size='md' type="email" placeholder="Enter email" ref={emailRef} />
                     </Form.Group>
                     <br></br>
                     <Form.Group id="signInPassword">
-                        <Form.Control size='lg' placeholder="Password" ref={passwordRef}/>
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control size='md' placeholder="Enter password" ref={passwordRef}/>
                     </Form.Group>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <button onClick={handleSubmit}>Sign Up!</button>
+                <Button className="custom-btn" onClick={handleSubmit}>Sign Up!</Button>
             </Modal.Footer>
          </Modal>
         </>

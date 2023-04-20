@@ -19,16 +19,16 @@ function NavBar({user, setUser}) {
 
     return (
         <>
-        <Navbar bg="light" variant="light">
+        <Navbar className='Navbar'>
          <Container fluid style={{maxWidth: "1600px"}}>
             <Navbar.Brand href="/" ><img id='Navlogo' src={logo} alt='logo' /></Navbar.Brand>
             <Nav className="me-auto">
-                <Nav.Link href='/user'>Home</Nav.Link>
+                <Nav.Link id="texts" href='/user'>Texts</Nav.Link>
+                <Nav.Link id="exampleLink" href='/examples'>Examples</Nav.Link>
              </Nav>
-             <Nav>
-                <Nav.Link id="exampleLink" href='/examples'>Example texts</Nav.Link>
-            {user.name ? <Navbar.Text>Welcome, {user.name}!</Navbar.Text> : <LoginForm setUser={setUser} user={user}/>}
-            {user.name ? <button onClick={handleLogout}>Logout</button> : null}
+             <Nav> 
+            {user.name ? <><Navbar.Text id='welcome'>Welcome, {user.name}!</Navbar.Text></> : <LoginForm setUser={setUser} user={user}/>}
+            {user.name ? <button id='logout' onClick={handleLogout}>Logout</button> : null}
              </Nav>
          </Container>
       </Navbar>

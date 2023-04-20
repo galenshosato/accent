@@ -31,7 +31,7 @@ function UserTextList({user, setUserTexts, userTexts, showAddFile, setShowAddFil
                     })}
                 </Container>
                 <Container className='d-flex justify-content-center align-items-center' style={{marginTop:'20px'}}>
-                <Button onClick={handleClick}>Add A New Text</Button>
+                <Button className="custom-btn" onClick={handleClick}>Add A New Text</Button>
                 </Container>
             </div>    
             <AddFileModal showAddFile={showAddFile} setShowAddFile={setShowAddFile} setUploadText={setUploadText} 

@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import { Card, Button } from "react-bootstrap"
+import { Card, Button, OverlayTrigger, Tooltip } from "react-bootstrap"
 import TranscriptionCard from "./TranscriptionCard"
 import AddTrModal from "./AddTrModal"
 
@@ -34,6 +34,7 @@ function UserTextCard({text, user}) {
     function handleIsChecked(button) {
       if (button === isChecked) {
         setIsChecked(null)
+        setExpan(false)
       }
 
       else {
@@ -59,16 +60,24 @@ function UserTextCard({text, user}) {
 
   return (
     <>
-    <Card style={cardStyle}>
+    <Card style={cardStyle} className="cards">
       <Card.Body>
         <Card.Title onClick={() => {setExpan(!isExpan); setIsChecked(false)}} className={isExpan ? 'text-center mb-3 title' : 'text-center title'}>{text['text_title']}</Card.Title>
         <div className='d-flex justify-content-center align-items-center' style={{marginBottom: '10px', gap: '10px'}}>
         {buttons.map(button => {
-           return <Button key={button} name={button.dialect} onClick={(e) => {handleClick(e); handleIsChecked(button)}} size="sm" variant={button === isChecked ? "primary" : 'outline-primary'}>{button.dialect}</Button>
+           return <Button key={button} name={button.dialect} onClick={(e) => {handleClick(e); handleIsChecked(button)}} size="sm" className={button === isChecked ? "custom-btn-active" : 'custom-btn-outline'}>{button.dialect}</Button>
         })}
         </div>
+        
         <div className='d-flex justify-content-center align-items-center'>
-        <Button size="sm" variant='outline-dark' onClick={handleShowTr}>+</Button>
+        <OverlayTrigger placement="right"
+                        overlay={
+                          <Tooltip id='tooltip-right'>
+                            Add a new accent to this text!
+                          </Tooltip>
+                        }>
+        <Button className="custom-btn-outline" size="sm" variant='outline-dark' onClick={handleShowTr}>+</Button>
+        </OverlayTrigger>
         </div>
         
         {isExpan && (

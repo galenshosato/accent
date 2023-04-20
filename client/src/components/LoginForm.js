@@ -1,7 +1,8 @@
 import {useState} from "react";
-import {Modal, Form} from 'react-bootstrap'
+import {Modal, Form, Button} from 'react-bootstrap'
 import SignInModal from "./SignInModal";
 import { useNavigate } from "react-router-dom";
+import logo from "../images/Accent_logo_small.png"
 
 function LoginForm({setUser, user}) {
     const [showLogin, setShowLogin] = useState(false)
@@ -44,7 +45,7 @@ function LoginForm({setUser, user}) {
         <button onClick={() => setShowLogin(true)}>Login/Sign Up</button>
         <Modal centered show={showLogin} onHide={() => setShowLogin(false)}>
             <Modal.Header>
-                <Modal.Title>Login</Modal.Title>
+                <img class='modalLogo' src={logo} alt="logo"/>
             </Modal.Header>
             <Modal.Body>
                 <Form id='login-form'>
@@ -66,8 +67,8 @@ function LoginForm({setUser, user}) {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <a href={`/${user.username}`}>
-                <button onClick={handleSubmit}>Login!</button>
+                <a href={`/user`}>
+                <Button className="custom-btn" onClick={handleSubmit}>Login!</Button>
                 </a>
             </Modal.Footer>
         </Modal>

@@ -39,14 +39,16 @@ function AddFileModal({showAddFile, setShowAddFile, setTitle, setUploadText, set
     return (
         <>
         <Modal show={showAddFile} onHide={() => setShowAddFile(false)} >
-            <Modal.Body>
+            <Modal.Header>
                 <img class='modalLogo' src={logo} alt="logo"/>
-                <br></br>
-                <Modal.Title>New Text</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Modal.Title className="mod-titles">New Text</Modal.Title>
                 <br></br>
                 <Form>
                     <Form.Group>
-                        <Form.Control type='text' placeholder='Title' autoFocus ref={titleRef}/>
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control type='text' placeholder='Enter title' autoFocus ref={titleRef}/>
                     </Form.Group>
                     <br></br>
                     <Form.Group controlId='formFile' className='mb-3'>
@@ -59,7 +61,7 @@ function AddFileModal({showAddFile, setShowAddFile, setTitle, setUploadText, set
                     Input your own text? <span className='pointer'onClick={handleClick}>Click here!</span>
                 </span>
                 <br></br>
-              <Button variant='primary' onClick={handleSubmit} size="lg">
+              <Button className="custom-btn" onClick={handleSubmit} size="md">
                         Upload
                     </Button>  
             </Modal.Body>

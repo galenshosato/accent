@@ -1,25 +1,31 @@
-.dropdown-toggle {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    color: #333;
-    text-decoration: none;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .dropdown-toggle:focus {
-    outline: none;
-  }
-
-  #Navlogo {
+#Navlogo {
     width: 4.5rem;
   }
   
-  #exampleLink {
-    margin-right: 100px;
+#exampleLink {
     font-style: oblique;
     font-weight: bold;
+    margin-left: 20px;
   }
   
-  
+.Navbar {
+  background-color: rgb(170, 146, 114);
+
+}
+
+#logout {
+  margin-left: 10px;
+  border-radius: 15px ;
+}
+
+#texts {
+  font-style: oblique;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+#welcome {
+  font-family: 'Lucida Handwriting';
+  font-weight: bold;
+  margin-right: 50px;
+}

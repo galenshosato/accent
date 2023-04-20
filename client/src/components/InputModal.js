@@ -27,26 +27,28 @@ function InputModal({showInput, setShowInput, setTitle, setUploadText, setShowLa
     return (
         <>
         <Modal show={showInput} onHide={() => setShowInput(false)} >
-            <Modal.Body >
+            <Modal.Header>
                 <img class='modalLogo' src={logo} alt="logo"/>
-                <br></br>
-                <Modal.Title>Create New Text</Modal.Title>
+            </Modal.Header>
+            <Modal.Body >
+                <Modal.Title className='mod-titles'>Create New Text</Modal.Title>
                 <br></br>
                 <Form>
                     <Form.Group>
-                        <Form.Control type='text' placeholder='Title' autoFocus ref={titleRef}/>
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control type='text' placeholder='Enter title' autoFocus ref={titleRef}/>
                     </Form.Group>
                     <br></br>
                     <Form.Group>
-                        <Form.Label>Enter Your Text</Form.Label>
-                        <Form.Control type='textarea' placeholder='Text' ref={textRef} />
+                        <Form.Label>Custom Text</Form.Label>
+                        <Form.Control type='textarea' placeholder='Enter your text' ref={textRef} />
                     </Form.Group>
                     <br></br>
                     <span className='my-span'>
                         Upload a file? <span className='pointer' onClick={handleChange}>Click here!</span>
                     </span>
                     <br></br>
-                    <Button variant='primary' onClick={handleClick}>Submit</Button>
+                    <Button className='custom-btn' onClick={handleClick}>Submit</Button>
                 </Form>
             </Modal.Body>
         </Modal>

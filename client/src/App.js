@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import UserTextList from './components/UserTextList';
 import ConstTextList from './components/ConstTextList';
+import Home from './components/Home';
 
 import {Route, Routes} from 'react-router-dom'
 
@@ -40,6 +41,7 @@ function App() {
       <br></br>
       <NavBar user={user} setUser={setUser}/>
       <Routes>
+        <Route element={<Home />} path='/' />
         <Route element={<ConstTextList constText={constText} user={user} showLangChoice={showLangChoice} setShowLangChoice={setShowLangChoice} />} path='/examples' />
         <Route element={<UserTextList user={user} setUserTexts={setUserTexts} userTexts={userTexts} showAddFile={showAddFile} setShowAddFile={setShowAddFile} 
         showLangChoice={showLangChoice} setShowLangChoice={setShowLangChoice} showInput={showInput} setShowInput={setShowInput} />} path={`/user`} />

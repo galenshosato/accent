@@ -1,0 +1,66 @@
+body {
+    background-image: url('./images/paper.png');
+}
+
+.custom-btn {
+    background-color: rgb(170, 146, 114);
+    border-color: rgb(94, 84, 72);
+    color: ivory;
+    
+  }
+  
+.custom-btn:hover {
+    background-color: rgb(105, 87, 80);
+}
+
+.cards {
+    border: 2px solid olive;
+    border-radius: 10px;
+  }
+
+  .custom-btn-outline {
+    border-color: rgb(170, 146, 114);
+    color: black;
+    background-color: whitesmoke;
+}
+
+.custom-btn-outline:hover {
+    background-color: rgb(105, 87, 80);
+}
+
+.custom-btn-outline:active {
+    background-color: rgb(105, 87, 80) !important;
+    color: whitesmoke !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.custom-btn-active {
+    background-color: rgb(105, 87, 80);
+    color: whitesmoke
+}
+
+
+.custom-btn-active:hover {
+    background-color: rgb(105, 87, 80);
+}
+
+.custom-btn-active:active {
+    background-color: rgb(105, 87, 80) !important ;
+    color: whitesmoke !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.custom-submit-btn {
+    background-color: rgb(170, 146, 114);
+}
+
+.custom-submit-btn:hover {
+    background-color: rgb(105, 87, 80);
+}
+
+
+.mod-titles {
+    font-family: 'Lucida Sans';
+}
