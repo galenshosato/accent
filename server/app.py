@@ -207,11 +207,11 @@ def get_trs_for_text(username, id):
         return make_response(jsonify(new_tt.to_dict()), 201)
 
 
-@app.route('/api/<string:username>/<int:id>/tr/<string:language>', methods = ['GET', 'DELETE'])
-def get_tr_for_piece_by_lang(username, id, language):
+@app.route('/api/<string:username>/<int:id>/tr/<string:dialect>', methods = ['GET', 'DELETE'])
+def get_tr_for_piece_by_lang(username, id, dialect):
     user = User.query.filter_by(username = username).first()
     text = Text.query.filter(Text.id==id, Text.user_id==user.id).first()
-    text_transcription = TextTranscription.query.filter(TextTranscription.text_id == text.id, TextTranscription.language == language).first()
+    text_transcription = TextTranscription.query.filter(TextTranscription.text_id == text.id, TextTranscription.dialect == dialect).first()
     
     if request.method == 'GET':
         text_transcription_dict = text_transcription.to_dict()

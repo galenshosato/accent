@@ -6,19 +6,43 @@ import AddTrModal from "./AddTrModal"
 function UserTextCard({text, user}) {
     const [isExpan, setExpan] = useState(false)
     const [showAddTrModal, setShowAddTrModal] = useState(false)
+    const [tr, setTr] = useState(text.transcriptions[0])
+    const [isChecked, setIsChecked] = useState(false)
 
     const buttons = text.transcriptions
-    const trs = text.transcriptions[0]
-    const lang = trs.language
+    const lang = tr.language
     
 
     
     function handleClick(e) {
-    setExpan(!isExpan);
+      const name = e.target.name
+
+      fetch(`/api/${user.username}/${text.id}/tr/${name}`)
+      .then(resp=> resp.json())
+      .then(data => setTr(data))
+      
+
+      if (isExpan) {
+        return
+      }
+      
+      else {
+        setExpan(!isExpan)
+      }
   };
 
+    function handleIsChecked(button) {
+      if (button === isChecked) {
+        setIsChecked(null)
+      }
+
+      else {
+        setIsChecked(button)
+      }
+
+    }
+
     function handleShowTr(e) {
-      console.log(e.target)
       setShowAddTrModal(true)
     }
 
@@ -37,10 +61,10 @@ function UserTextCard({text, user}) {
     <>
     <Card style={cardStyle}>
       <Card.Body>
-        <Card.Title className={isExpan ? 'text-center mb-3 title' : 'text-center title'}>{text['text_title']}</Card.Title>
+        <Card.Title onClick={() => {setExpan(!isExpan); setIsChecked(false)}} className={isExpan ? 'text-center mb-3 title' : 'text-center title'}>{text['text_title']}</Card.Title>
         <div className='d-flex justify-content-center align-items-center' style={{marginBottom: '10px', gap: '10px'}}>
         {buttons.map(button => {
-           return <Button key={button.id} onClick={handleClick} size="sm" variant="outline-primary">{button.dialect}</Button>
+           return <Button key={button} name={button.dialect} onClick={(e) => {handleClick(e); handleIsChecked(button)}} size="sm" variant={button === isChecked ? "primary" : 'outline-primary'}>{button.dialect}</Button>
         })}
         </div>
         <div className='d-flex justify-content-center align-items-center'>
@@ -49,13 +73,13 @@ function UserTextCard({text, user}) {
         
         {isExpan && (
             <>
-            <TranscriptionCard text={trs.text1} tr={trs.tr1} lang={lang} />
-            {trs.text2 && trs.tr2 ? <TranscriptionCard text={trs.text2} tr={trs.tr2} lang={lang} /> : null}
-            {trs.text3 && trs.tr3 ? <TranscriptionCard text={trs.text3} tr={trs.tr3} lang={lang} /> : null}
-            {trs.text4 && trs.tr4 ? <TranscriptionCard text={trs.text4} tr={trs.tr4} lang={lang} /> : null}
-            {trs.text5 && trs.tr5 ? <TranscriptionCard text={trs.text5} tr={trs.tr5} lang={lang} /> : null}
-            {trs.text6 && trs.tr6 ? <TranscriptionCard text={trs.text6} tr={trs.tr6} lang={lang} /> : null}
-            {trs.text7 && trs.tr7 ? <TranscriptionCard text={trs.text7} tr={trs.tr7} lang={lang} /> : null}
+            <TranscriptionCard text={tr.text1} tr={tr.tr1} lang={lang} />
+            {tr.text2 && tr.tr2 ? <TranscriptionCard text={tr.text2} tr={tr.tr2} lang={lang} /> : null}
+            {tr.text3 && tr.tr3 ? <TranscriptionCard text={tr.text3} tr={tr.tr3} lang={lang} /> : null}
+            {tr.text4 && tr.tr4 ? <TranscriptionCard text={tr.text4} tr={tr.tr4} lang={lang} /> : null}
+            {tr.text5 && tr.tr5 ? <TranscriptionCard text={tr.text5} tr={tr.tr5} lang={lang} /> : null}
+            {tr.text6 && tr.tr6 ? <TranscriptionCard text={tr.text6} tr={tr.tr6} lang={lang} /> : null}
+            {tr.text7 && tr.tr7 ? <TranscriptionCard text={tr.text7} tr={tr.tr7} lang={lang} /> : null}
             </> 
         )}
       </Card.Body>
